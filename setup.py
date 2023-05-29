@@ -35,7 +35,7 @@ def main():
     print('Command executed with return code:', return_code)
 
     # Copy the .cache, .config, .zsh, .zshrc, .p10k.zsh, Backgrounds, and Scripts to $HOME directory
-    folders_to_copy = ['.cache', '.config', '.zsh', 'Backgrounds', 'Scripts']
+    folders_to_copy = ['.cache', '.config', '.zsh', 'Backgrounds', 'Scripts', '.scripts']
     files_to_copy = ['.zshrc', '.p10k.zsh']
     home_directory = os.path.expanduser('~')
 
