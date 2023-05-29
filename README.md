@@ -28,7 +28,7 @@ makepkg -si
 ```
 
 # Recommendations
-
+```text
 1. I recommend updating the ~/.config/hypr/hyprland.conf monitor configs to match your layout.
     a. As-is the monitor layout is two stacked "landscape" 1920x1080@144 monitors, with a 1920x1080@60 "portrait" monitor to the left.
 2. SUPER+ENTER to launch Wezterm. You'll need to change your shell to zsh.
@@ -44,7 +44,7 @@ makepkg -si
 5. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
-
+```
 
 # Installation
 
@@ -57,4 +57,4 @@ python setup.py
 
 # Screenshots
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/mM3YFSA" data-context="false" ><a href="//imgur.com/a/mM3YFSA"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+https://imgur.com/a/mM3YFSA
