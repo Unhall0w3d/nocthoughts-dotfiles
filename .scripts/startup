@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SCRIPTSDIR=$HOME/.scripts
+
+# Kill process if already running
+_ps=(waybar mako dunst)
+for _prs in "${_ps[@]}"; do
+    if [[ $(pidof ${_prs}) ]]; then
+        killall -9 ${_prs}
+    fi
+done
+
+# Apply Themes
+${SCRIPTSDIR}/gtkthemes &
+
+# Apply Themes
+${SCRIPTSDIR}/notifications &
+
+# Apply Themes
+${SCRIPTSDIR}/statusbar &
+
+# Xauthority
+${SCRIPTSDIR}/xauthority &
