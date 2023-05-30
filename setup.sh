@@ -54,8 +54,8 @@ fi
 # Create the directory and copy the file if it doesn't exist
 if [[ ! -d "/usr/share/zsh-theme-powerlevel10k" ]]; then
     echo "Creating directory: /usr/share/zsh-theme-powerlevel10k"
-    mkdir -p "/usr/share/zsh-theme-powerlevel10k"
+    sudo mkdir -p "/usr/share/zsh-theme-powerlevel10k"
 fi
 
 # Copy the powerlevel10k theme over
-cp -r "./usr/share/zsh-theme-powerlevel10k" "/usr/share/zsh-theme-powerlevel10k"
+sudo cp -r "./usr/share/zsh-theme-powerlevel10k" "/usr/share/zsh-theme-powerlevel10k"
