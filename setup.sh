@@ -23,12 +23,6 @@ LOG="install.log"
 read -rp "Do you want to install the script requirements (git|paru)? [y/N]: " script_reqs
 if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
     echo -e "$CNT - Installing packages..."
-    if ! pacman -Qs git > /dev/null ; then
-        echo -e "$CNT - Installing git..." &>> $LOG
-        sudo pacman -Syu git &>> $LOG
-    else
-        echo -e "$CNT - git is already installed" &>> $LOG
-        fi
     ISPARU=/usr/bin/paru
     if [ -f "$ISPARU" ]; then
       echo -e "$COK - Paru is installed. Moving on..." &>> $LOG
