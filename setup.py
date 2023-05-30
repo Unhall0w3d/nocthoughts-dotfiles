@@ -103,7 +103,7 @@ class DotFileSetup:
         print()
         print(self.pkglist)
         print()
-        print("This is your opportunity to back out. I will not provide an opportunity to exit. If necessary, ctrl+c.")
+        print("This is your opportunity to back out. I will not provide another opportunity to exit. If necessary, ctrl+c.")
         print("I'm not responsible for any damage you do by using this script.")
         print()
         print("Despite what my wife says, I'm not the cause of all the world's problems. Some, not all.")
