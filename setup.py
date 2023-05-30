@@ -9,7 +9,7 @@ class DotFileSetup:
                        'wf-recorder wlogout grimblast-git hyprpicker-git hyprpaper-git xdg-desktop-portal-hyprland-git ' \
                        'ffmpegthumbnailer tumbler wtype colord imagemagick swaylock-effects qt5-wayland qt6-wayland ' \
                        'ripgrep waybar-hyprland-git catppuccin-gtk-theme-mocha catppuccin-cursors-mocha ' \
-                       'catppuccin-mocha-grub-theme-git nwg-look cava pavucontrol ranger zsh starship neovim viewnior ' \
+                       'catppuccin-mocha-grub-theme-git nwg-look cava pavucontrol ranger zsh neovim viewnior ' \
                        'noise-suppression-for-voice thunar thunar-archive-plugin file-roller zsh oh-my-zsh-git ' \
                        'zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc ' \
                        'zsh-history-substring-search btop sddm-git sddm-sugar-candy-git swappy network-manager-applet ' \
@@ -103,7 +103,6 @@ class DotFileSetup:
         print()
         print(self.pkglist)
         print()
-        print("This is your opportunity to back out. I will not provide another opportunity to exit. If necessary, ctrl+c.")
         print("I'm not responsible for any damage you do by using this script.")
         print()
         print("Despite what my wife says, I'm not the cause of all the world's problems. Some, not all.")
@@ -111,16 +110,19 @@ class DotFileSetup:
         while True:
             installpkg = input("Ready to install?(Y/n): ")
             if installpkg.lower() != 'y':
-                print("I understand. You're either scared, or didn't input 'y'. Come back when you have the resolve.")
-                exit()
-            else:
+                print("I understand. You either have the packages, or didn't input 'y'. Skipping to dotfiles... ")
                 break
-        print("Beginning package installation via paru...")
-        self.pkg_install()
+            else:
+                print("Beginning package installation via paru...")
+                self.pkg_install()
+                break
         print("Package installation complete...")
         while True:
-            dotfilesetup = input("Ready to setup dotfiles and required scripts/background?(Y): ")
-            if dotfilesetup.lower() == 'y':
+            dotfilesetup = input("Ready to setup dotfiles and required scripts/background?(Y/n): ")
+            if dotfilesetup.lower() != 'y':
+                print(f'You pressed {dotfilesetup.lower()}. Expected "y". Exiting... ')
+                exit()
+            else:
                 print("Moving files... ")
                 self.dotfile_install()
                 print("Dotfiles have been moved successfully... ")
