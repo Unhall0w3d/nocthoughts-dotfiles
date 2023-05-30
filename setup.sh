@@ -149,7 +149,7 @@ sudo chmod +x ~/.scripts/xhost.sh
 
 # Setup SDDM Theme
 echo -e "$CNT - Setting up the login screen..." 
-sudo cp -R sddm_theme /usr/share/sddm/themes/ 
+sudo cp -r sddm_theme /usr/share/sddm/themes/
 sudo chown -R $USER:$USER /usr/share/sddm/themes/sddm_theme 
 sudo mkdir /etc/sddm.conf.d 
 echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf
