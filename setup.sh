@@ -65,7 +65,6 @@ read -rp 'Would you like to disable WiFi powersave?(Y/n) ' WIFI
 if [[ $WIFI == "Y" || $WIFI == "y" ]]; then
     LOC="/etc/NetworkManager/conf.d/wifi-powersave.conf"
     echo -e "The following file has been created $LOC."
-    echo -e "\n"
     echo -e "Restarting NetworkManager service..."
     sleep 1
     sudo systemctl restart NetworkManager
