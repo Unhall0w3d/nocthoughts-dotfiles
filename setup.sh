@@ -166,9 +166,9 @@ cp start_hyprland ~/
 
 # Setup some theme settings
 xfconf-query -c xsettings -p /Net/ThemeName -s "Sweet-Dark"
- xfconf-query -c xsettings -p /Net/IconThemeName -s "Sweet-Dark"
- gsettings set org.gnome.desktop.interface gtk-theme "Sweet-Dark"
- gsettings set org.gnome.desktop.interface icon-theme "Sweet-Dark"
+xfconf-query -c xsettings -p /Net/IconThemeName -s "Sweet-Dark"
+gsettings set org.gnome.desktop.interface gtk-theme "Sweet-Dark"
+gsettings set org.gnome.desktop.interface icon-theme "Sweet-Dark"
 sudo ln -sf /usr/share/sddm/themes/sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 
 # Script Complete
