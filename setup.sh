@@ -9,7 +9,7 @@ pkglist=("hyprland-git" "polkit-kde-agent" "dunst" "grimblast" "rofi" "rofi-emoj
 "noise-suppression-for-voice" "thunar" "thunar-archive-plugin" "file-roller" "zsh" "oh-my-zsh-git" \
 "zsh-autosuggestions" "zsh-autocomplete-git" "zsh-autoswitch-virtualenv-git" "zsh-doc" \
 "zsh-history-substring-search" "btop" "sddm-git" "sddm-sugar-candy-git" "swappy" "network-manager-applet" \
-"gvfs" "nvchad-git")
+"gvfs" "nvchad-git" "neofetch" "bluez" "blueman" "bluez-utils")
 
 # Prompt the user to install the packages
 read -rp "Do you want to install the packages? [y/N]: " install_packages
@@ -59,3 +59,15 @@ fi
 
 # Copy the powerlevel10k theme over
 sudo cp -r "./usr/share/zsh-theme-powerlevel10k" "/usr/share/zsh-theme-powerlevel10k"
+
+# Disable wifi powersave mode ###
+read -rp 'Would you like to disable WiFi powersave?(Y/n) ' WIFI
+if [[ $WIFI == "Y" || $WIFI == "y" ]]; then
+    LOC="/etc/NetworkManager/conf.d/wifi-powersave.conf"
+    echo -e "The following file has been created $LOC."
+    echo -e "\n"
+    echo -e "Restarting NetworkManager service..."
+    sleep 1
+    sudo systemctl restart NetworkManager
+    sleep 2
+fi
