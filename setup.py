@@ -10,7 +10,7 @@ class DotFileSetup:
                        'ffmpegthumbnailer tumbler wtype colord imagemagick swaylock-effects qt5-wayland qt6-wayland ' \
                        'ripgrep waybar-hyprland-git catppuccin-gtk-theme-mocha catppuccin-cursors-mocha ' \
                        'catppuccin-mocha-grub-theme-git nwg-look cava pavucontrol ranger zsh starship neovim viewnior ' \
-                       'noise-suppression-for-voice thunar thunar-archive-plugin file-roller zsh oh-my-zsh ' \
+                       'noise-suppression-for-voice thunar thunar-archive-plugin file-roller zsh oh-my-zsh-git ' \
                        'zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc ' \
                        'zsh-history-substring-search btop sddm-git sddm-sugar-candy-git swappy network-manager-applet ' \
                        'gvfs nvchad-git'
@@ -107,6 +107,7 @@ class DotFileSetup:
         print("I'm not responsible for any damage you do by using this script.")
         print()
         print("Despite what my wife says, I'm not the cause of all the world's problems. Some, not all.")
+        print()
         while True:
             installpkg = input("Ready to install?(Y/n): ")
             if installpkg.lower() != 'y':
