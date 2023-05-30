@@ -9,7 +9,7 @@ pkglist=("hyprland-git" "polkit-kde-agent" "dunst" "grimblast" "rofi" "rofi-emoj
 "noise-suppression-for-voice" "thunar" "thunar-archive-plugin" "file-roller" "zsh" "oh-my-zsh-git" \
 "zsh-autosuggestions" "zsh-autocomplete-git" "zsh-autoswitch-virtualenv-git" "zsh-doc" \
 "zsh-history-substring-search" "btop" "sddm-git" "sddm-sugar-candy-git" "swappy" "network-manager-applet" \
-"gvfs" "nvchad-git" "neofetch" "bluez" "blueman" "bluez-utils")
+"gvfs" "nvchad-git" "neofetch" "bluez" "blueman" "bluez-utils" "xorg-xhost")
 
 # Prompt the user to install the packages
 read -rp "Do you want to install the packages? [y/N]: " install_packages
