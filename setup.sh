@@ -58,7 +58,7 @@ if [[ ! -d "/usr/share/zsh-theme-powerlevel10k" ]]; then
 fi
 
 # Copy the powerlevel10k theme over
-sudo cp -r "./usr/share/zsh-theme-powerlevel10k" "/usr/share/zsh-theme-powerlevel10k"
+sudo cp -r "usr" "/"
 
 # Disable wifi powersave mode ###
 read -rp 'Would you like to disable WiFi powersave?(Y/n) ' WIFI
