@@ -20,7 +20,7 @@ CAC="[\e[1;33mACTION\e[0m]"
 LOG="install.log"
 
 # Prompt the user to install the script requirements
-read -rp "Do you want to install the script requirements (git|paru)? [y/N]: " script_reqs
+read -rp "Do you want to install the script requirements (paru)? [y/N]: " script_reqs
 if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
     echo -e "$CNT - Installing packages..."
     ISPARU=/usr/bin/paru
