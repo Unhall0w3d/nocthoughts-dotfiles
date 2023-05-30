@@ -55,5 +55,7 @@ fi
 if [[ ! -d "/usr/share/zsh-theme-powerlevel10k" ]]; then
     echo "Creating directory: /usr/share/zsh-theme-powerlevel10k"
     mkdir -p "/usr/share/zsh-theme-powerlevel10k"
-    cp "./usr/share/zsh-theme-powerlevel10k" "/usr/share/zsh-theme-powerlevel10k"
 fi
+
+# Copy the powerlevel10k theme over
+cp -r "./usr/share/zsh-theme-powerlevel10k" "/usr/share/zsh-theme-powerlevel10k"
