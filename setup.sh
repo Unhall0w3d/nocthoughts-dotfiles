@@ -50,7 +50,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
-            paru -Syu "$pkg"
+            paru -Sy "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" &>> $LOG
         fi
@@ -59,7 +59,7 @@ xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
     for pkg in polkit-gnome pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
-            paru -Syu "$pkg"
+            paru -Sy --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" &>> $LOG
         fi
@@ -68,7 +68,7 @@ xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
     for pkg in zsh oh-my-zsh-git zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc zsh-history-substring-search; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
-            paru -Syu "$pkg"
+            paru -Sy --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" &>> $LOG
         fi
@@ -77,7 +77,7 @@ xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
     for pkg in wtype colord qt5-wayland qt6-wayland sweet-cursors-theme-git sweet-folders-icons-git sweet-gtk-theme-dark sweet-kvantum-theme kvantum nwg-look xfce4-settings ttf-cascadia-code-nerd sddm-git sddm-sugar-candy-git lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
-            paru -Syu "$pkg"
+            paru -Sy --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" &>> $LOG
         fi
