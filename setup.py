@@ -98,10 +98,14 @@ class DotFileSetup:
 
     def main(self):
         print("Welcome to the NOCThought DotFile Installer... ")
+        print()
         print("Review the list below and confirm you want to install the required packages... ")
+        print()
         print(self.pkglist)
+        print()
         print("This is your opportunity to back out. I will not provide an opportunity to exit. If necessary, ctrl+c.")
         print("I'm not responsible for any damage you do by using this script.")
+        print()
         print("Despite what my wife says, I'm not the cause of all the world's problems. Some, not all.")
         while True:
             installpkg = input("Ready to install?(Y/n): ")
