@@ -44,6 +44,9 @@ makepkg -si
 5. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
+6. Re-install Paru
+    a. Because you won't have the paru completions, you can solve it or you can do a dance of compiling yay, using yay to remove paru, reinstall paru using yay, then uninstall yay.
+    b. Whatever works for you.
 ```
 
 # Installation
@@ -57,4 +60,4 @@ python setup.py
 
 # Screenshots
 
-https://imgur.com/a/mM3YFSA
+[My RIP (Rice-In-Progress)](https://imgur.com/a/mM3YFSA)
