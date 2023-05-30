@@ -130,6 +130,5 @@ class DotFileSetup:
 
 
 if __name__ == "__main__":
-    DotFileSetup.__init__(self)
-    DotFileSetup.main(self)
+    DotFileSetup().main()
     exit()
