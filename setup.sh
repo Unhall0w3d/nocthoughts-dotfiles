@@ -132,7 +132,7 @@ sudo systemctl enable --now bluetooth.service &>> $LOG
 sleep 2
 echo -e "$COK - Bluetooth started successfully." &>> $LOG
 echo -e "$CNT - Starting SDDM Services..." &>> $LOG
-sudo systemctl enable --now sddm &>> $LOG
+sudo systemctl enable sddm &>> $LOG
 sleep 2
 echo -e "$COK - SDDM started successfully." &>> $LOG
 echo -e "$CNT - Removing conflicting XDG Portals... "
