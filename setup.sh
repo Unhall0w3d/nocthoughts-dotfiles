@@ -35,20 +35,6 @@ if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
     fi
 fi
 
-# Define the list of packages to install
-
-stage1="hyprland-git" "wezterm" "swaylock-effects" "wofi" "wlogout" "rofi" "rofi-emoji" "mako" \
-"xdg-desktop-portal-hyprland-git" "swappy" "grimblast-git" "slurp" "thunar" "xorg-xhost"
-stage2="polkit-gnome" "pavucontrol" "brightnessctl" "bluez" "bluez-utils" "blueman" "network-manager-applet" "gvfs" \
-"thunar-archive-plugin" "file-roller" "neofetch" "neovim" "ranger" "fnm" "noise-suppression-for-voice" "viewnior" \
-"cava" "ripgrep" "ffmpegthumbnailer" "btop" "dunst" "wl-clipboard" "wf-recorder" "hyprpicker-git" "hyprpaper-git" \
-"tumbler" "imagemagick" "ncspot" "pix"
-stage3="zsh" "oh-my-zsh-git" "zsh-autosuggestions" "zsh-autocomplete-git" "zsh-autoswitch-virtualenv-git" "zsh-doc" \
-"zsh-history-substring-search"
-stage4="wtype" "colord" "qt5-wayland" "qt6-wayland" "sweet-cursors-theme-git" "sweet-folders-icons-git" \
-"sweet-gtk-theme-dark" "sweet-kvantum-theme" "kvantum" "nwg-look" "xfce4-settings" "ttf-cascadia-code-nerd" \
-"sddm-git" "sddm-sugar-candy-git" "lxappearance"
-
 # Prompt the user to install the packages
 read -rp "Do you want to install the packages? [y/N]: " install_packages
 if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
@@ -60,7 +46,8 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     paru -S --noconfirm waybar-hyprland-git &>> $LOG
     echo -e "$CNT - Waybar installed."
     echo -e "$CNT - Installing main components..." &>> $LOG
-    for pkg in "${stage1[@]}"; do
+    for pkg in hyprland-git wezterm swaylock-effects wofi wlogout rofi rofi-emoji mako \
+xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
             paru -Syu "$pkg"
@@ -69,7 +56,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
         fi
     done
     echo -e "$CNT - Installing utilities..." &>> $LOG
-    for pkg in "${stage2[@]}"; do
+    for pkg in polkit-gnome pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
             paru -Syu "$pkg"
@@ -78,7 +65,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
         fi
     done
     echo -e "$CNT - Installing zsh, plugins..." &>> $LOG
-    for pkg in "${stage3[@]}"; do
+    for pkg in zsh oh-my-zsh-git zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc zsh-history-substring-search; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
             paru -Syu "$pkg"
@@ -87,7 +74,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
         fi
     done
     echo -e "$CNT - Installing themes, theme utilities..." &>> $LOG
-    for pkg in "${stage4[@]}"; do
+    for pkg in wtype colord qt5-wayland qt6-wayland sweet-cursors-theme-git sweet-folders-icons-git sweet-gtk-theme-dark sweet-kvantum-theme kvantum nwg-look xfce4-settings ttf-cascadia-code-nerd sddm-git sddm-sugar-candy-git lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
             paru -Syu "$pkg"
