@@ -32,6 +32,7 @@ if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
       cd paru-git &>> $LOG
       makepkg -si --noconfirm &>> ../$LOG
       cd ..
+    fi
 fi
 
 # Define the list of packages to install
