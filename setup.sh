@@ -46,8 +46,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     paru -S --noconfirm waybar-hyprland-git &>> $LOG
     echo -e "$CNT - Waybar installed."
     echo -e "$CNT - Installing main components..." &>> $LOG
-    for pkg in hyprland-git wezterm swaylock-effects wofi wlogout rofi rofi-emoji mako \
-xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
+    for pkg in hyprland-git wezterm swaylock-effects wofi wlogout rofi rofi-emoji mako xdg-desktop-portal-hyprland-git swappy grimblast-git slurp thunar xorg-xhost; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg..." &>> $LOG
             paru -Sy "$pkg"
