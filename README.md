@@ -9,11 +9,6 @@ This script has only been tested on a base install of Arch Linux, and was built 
 Usage on any other distro is considered unsupported.
 ```
 
-**python**
-```zsh
-pacman -Syu python
-```
-
 **git**
 ```zsh
 pacman -Syu git
@@ -55,7 +50,8 @@ makepkg -si
 cd ~/Downloads/
 git clone https://github.com/Unhall0w3d/nocthoughts-dotfiles.git
 cd nocthoughts-dotfiles
-python setup.py
+chmod +x setup.sh
+./setup.sh
 ```
 
 # Screenshots
