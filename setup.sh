@@ -16,9 +16,6 @@ CAT="[\e[1;37mATTENTION\e[0m]"
 CWR="[\e[1;35mWARNING\e[0m]"
 CAC="[\e[1;33mACTION\e[0m]"
 
-# Log File
-LOG="install.log"
-
 # Prompt the user to install the script requirements
 read -rp "Do you want to install the script requirements (paru)? [y/N]: " script_reqs
 if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
@@ -29,9 +26,9 @@ if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
     else
       echo -e "$CWR - Paru is NOT installed. Installing... " 
       git clone https://aur.archlinux.org/paru-git.git
-      cd paru-git &>> $LOG
+      cd paru-git 
       makepkg -si --noconfirm
-      cd .. &>> $LOG
+      cd .. 
     fi
 fi
 
@@ -99,12 +96,12 @@ read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
 if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
         echo -e "$CNT - Copying folder $folder..." 
-        cp -r "$folder" ~/ &>> $LOG
+        cp -r "$folder" ~/ 
     done
 
     for file in "${files_to_copy[@]}"; do
         echo -e "$CNT - Copying file $file..." 
-        cp "$file" ~/ &>> $LOG
+        cp "$file" ~/ 
     done
 
     echo -e "$CNT - Config files have been moved." 
@@ -112,7 +109,7 @@ fi
 
 # Copy the powerlevel10k theme over
 echo -e "$CNT - Copying powerlevel10k theme over..." 
-sudo cp -r "usr" "/" &>> $LOG
+sudo cp -r "usr" "/" 
 
 # Disable Wifi Powersave mode
 read -rp 'Would you like to disable WiFi powersave?(Y/n) ' WIFI
@@ -121,58 +118,58 @@ if [[ $WIFI == "Y" || $WIFI == "y" ]]; then
     echo -e "$CNT - The following file has been created $LOC." 
     echo -e $CAT "Restarting NetworkManager service..." 
     sleep 1
-    sudo systemctl restart NetworkManager &>> $LOG
+    sudo systemctl restart NetworkManager 
     sleep 2
     echo -e "$COK - NetworkManager restarted successfully." 
 fi
 
 # Enable Services
 echo -e "$CNT - Starting Bluetooth Services..." 
-sudo systemctl enable --now bluetooth.service &>> $LOG
+sudo systemctl enable --now bluetooth.service 
 sleep 2
 echo -e "$COK - Bluetooth started successfully." 
 echo -e "$CNT - Starting SDDM Services..." 
-sudo systemctl enable sddm &>> $LOG
+sudo systemctl enable sddm 
 sleep 2
 echo -e "$COK - SDDM started successfully." 
 echo -e "$CNT - Removing conflicting XDG Portals... "
-paru -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk xdg-desktop-portal-kde &>> $LOG
+paru -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk xdg-desktop-portal-kde 
 
 # Reset Font Cache
 echo -e "$CNT - Rebuilding font cache..." 
-sudo fc-cache -f -v &>> $LOG
+sudo fc-cache -f -v 
 echo -e "$COK - Font cache rebuilt." 
 
 # Set Scripts Executable
 echo -e "$CNT - Setting scripts to executable..." 
-sudo chmod +x ~/.scripts/colorpicker &>> $LOG
-sudo chmod +x ~/.scripts/IOMMU.sh &>> $LOG
-sudo chmod +x ~/.scripts/screensht &>> $LOG
-sudo chmod +x ~/.scripts/xhost.sh &>> $LOG
+sudo chmod +x ~/.scripts/colorpicker 
+sudo chmod +x ~/.scripts/IOMMU.sh 
+sudo chmod +x ~/.scripts/screensht
+sudo chmod +x ~/.scripts/xhost.sh
 
 # Setup SDDM Theme
 echo -e "$CNT - Setting up the login screen..." 
-sudo cp -R sddm_theme /usr/share/sddm/themes/ &>> $LOG
-sudo chown -R $USER:$USER /usr/share/sddm/themes/sddm_theme &>> $LOG
-sudo mkdir /etc/sddm.conf.d &>> $LOG
+sudo cp -R sddm_theme /usr/share/sddm/themes/ 
+sudo chown -R $USER:$USER /usr/share/sddm/themes/sddm_theme 
+sudo mkdir /etc/sddm.conf.d 
 echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf
 WLDIR=/usr/share/wayland-sessions
 if [ -d "$WLDIR" ]; then
     echo -e "$COK - $WLDIR found..." 
 else
     echo -e "$CWR - $WLDIR NOT found, creating..." 
-    sudo mkdir $WLDIR &>> $LOG
+    sudo mkdir $WLDIR 
 fi
-sudo cp hyprland.desktop /usr/share/wayland-sessions/  &>> $LOG
-sudo sudo sed -i 's/Exec=Hyprland/Exec=\/home\/'$USER'\/start_hyprland/' /usr/share/wayland-sessions/hyprland.desktop &>> $LOG
-cp start_hyprland ~/ &>> $LOG
+sudo cp hyprland.desktop /usr/share/wayland-sessions/  
+sudo sudo sed -i 's/Exec=Hyprland/Exec=\/home\/'$USER'\/start_hyprland/' /usr/share/wayland-sessions/hyprland.desktop 
+cp start_hyprland ~/ 
 
 # Setup some theme settings
-xfconf-query -c xsettings -p /Net/ThemeName -s "Sweet-Dark" &>> $LOG
-xfconf-query -c xsettings -p /Net/IconThemeName -s "Sweet-Dark" &>> $LOG
-gsettings set org.gnome.desktop.interface gtk-theme "Sweet-Dark" &>> $LOG
-gsettings set org.gnome.desktop.interface icon-theme "Sweet-Dark" &>> $LOG
-ln -sf /usr/share/sddm/themes/sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg &>> $LOG
+xfconf-query -c xsettings -p /Net/ThemeName -s "Sweet-Dark" 
+xfconf-query -c xsettings -p /Net/IconThemeName -s "Sweet-Dark" 
+gsettings set org.gnome.desktop.interface gtk-theme "Sweet-Dark" 
+gsettings set org.gnome.desktop.interface icon-theme "Sweet-Dark" 
+ln -sf /usr/share/sddm/themes/sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg 
 
 # Script Complete
 echo -e "$COK - Script Completed!" 
