@@ -56,16 +56,9 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     echo -e "$CNT - Updating Paru databases... " 
     paru -Sy
 
-    # Install Waybar
-    echo -e "$CNT - Installing Waybar... " 
-    paru -S --noconfirm gcc12
-    export CC=gcc-12 CXX=g++-12
-    paru -S --noconfirm waybar-hyprland-git 
-    echo -e "$CNT - Waybar installed."
-
     # Installing Core Components
     echo -e "$CNT - Installing main components... " 
-    for pkg in hyprland-dev wezterm swaylock-effects swaybg wofi wlogout rofi rofi-emoji mako xdg-desktop-portal-hyprland swappy grimblast-git slurp thunar xorg-xhost python python-pyxdg xorg-bdftopcf xorg-fonts-encodings xorg-iceauth xorg-mkfontscale xorg-server xorg-server-common xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbprint xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-refresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwayland xorg-xwd xorg-xwininfo xorg-xwud xorgproto; do
+    for pkg in hyprland-dev wezterm swaylock-effects swaybg wofi wlogout rofi rofi-emoji mako xdg-desktop-portal-hyprland swappy grimblast-git slurp thunar xorg-xhost python python-pip python-pyxdg xorg-bdftopcf xorg-fonts-encodings xorg-iceauth xorg-mkfontscale xorg-server xorg-server-common xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbprint xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-refresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwayland xorg-xwd xorg-xwininfo xorg-xwud xorgproto; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --noconfirm "$pkg"
@@ -76,7 +69,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in mpv polkit-gnome pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in mpv wget polkit-gnome pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --noconfirm "$pkg"
@@ -105,8 +98,21 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
+    
+    # Install Waybar
+    echo -e "$CNT - Installing Waybar... " 
+    paru -S --noconfirm gcc12
+    export CC=gcc-12 CXX=g++-12
+    paru -S --noconfirm waybar-hyprland-git 
+    echo -e "$CNT - Waybar installed."
+
+    # Install Python Module - Requests. Required for weather display on Waybar.
+    echo -e "$CNT - Installing python module 'requests' via pip... "
+    pip install requests
+
     done
 fi
+
 
 # Prompt the user to clone the NvChad repository
 read -rp "Do you want to clone the NvChad repository? [y/N]: " clone_nvchad
@@ -114,6 +120,17 @@ if [[ $clone_nvchad == "Y" || $clone_nvchad == "y" ]]; then
     echo -e "$CNT - Cloning the NvChad repository... " 
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 fi
+
+# Prompt the user to download NerdFonts/CascadiaCode
+read -rp "Do you want to download and install NerdFonts/CascadiaCode?(Y/n): " nerdfont
+if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
+    echo -e "$CNT - Downloading and Installing NerdFonts/CascadiaCode... "
+    mkdir -p $HOME/Downloads/nerdfonts/
+    cd $HOME/Downloads/ && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip
+    unzip 'CascadiaCode.zip' -d $HOME/Downloads/nerdfonts/ && rm CascadiaCode.zip
+    sudo cp -r $HOME/Downloads/nerdfonts/ /usr/share/fonts/ && sudo rm -r $HOME/Downloads/nerdfonts/
+    echo -e "$CNT - Resetting Font Cache... "
+    fc-cache -rv
 
 # Define the folders and files to copy
 folders_to_copy=(".cache" ".config" ".zsh" "Backgrounds" ".scripts")
@@ -194,7 +211,8 @@ echo -e "$COK - Font cache rebuilt."
 echo -e "$COK - Script Completed!" 
 read -rp "Ready to get Hypr?(Y/n): " Hypr
 if [[ $Hypr == "Y" || $Hypr == "y" ]]; then
-  exec sudo systemctl start sddm 
+    echo -e "$COK - System is going down for a reboot... Get Hypr!"
+    sudo shutdown -r 5
 else
   exit
 fi
