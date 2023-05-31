@@ -163,6 +163,8 @@ echo -e "$CNT - Setting up SDDM Background... "
 sudo cp -r sddm_theme/ /usr/share/sddm/themes
 sudo rm /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 sudo cp ./sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
+sudo mkdir /etc/sddm.conf.d/
+sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
 
 # Enable Services
 echo -e "$CNT - Starting Bluetooth Services... " 
