@@ -54,3 +54,11 @@ chmod +x setup.sh
 # Screenshots
 
 [My RIP (Rice-In-Progress)](https://imgur.com/a/mM3YFSA)
+
+# Credits
+
+Credits will change as the dotfiles and theming change and are hand customized away from presets cobbled together from others. Regardless, I wouldn't have this setup without the efforts and available materials of others. Thank you.
+
+[LinuxMobile](https://github.com/linuxmobile) - hyprland-dots repo, various configs, some zsh goodies
+[SolDoesTech](https://github.com/SolDoesTech) - sddm theme base (sdt), some config/layout decisions, bash script inspiration (I knew python, didn't know bash scripting and bash performed much better. Seeing an example of how it was done, and borrowing some elements, got this working beautifully.)
+As well as the authors/maintainers of the packages installed via the script, Arch itself, etc. You know who you are.
