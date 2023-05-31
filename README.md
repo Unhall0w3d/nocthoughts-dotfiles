@@ -10,6 +10,7 @@ This script has only been tested on a base install of Arch Linux, and was built 
 If, for some reason, you want to run the Hyprland or Hypr iterations of 'ArcoLinuxB', this can be 'installed' over the top of it cleanly, and was tested on a Dell Latitude 5490 using Minimal Arch Install via 'archinstall', ArcoLinuxB Hyprland, and ArcoLinuxB Hypr.
 Why you would want to slap this on Arco, I don't know. You'd probably introduce unnecessary bloat. It's your system, mess it up however you wish. :)
 ```
+
 **git**
 ```
 pacman -Sy git
