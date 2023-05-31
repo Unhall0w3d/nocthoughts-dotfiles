@@ -35,15 +35,20 @@ fi
 # Prompt the user to install the packages
 read -rp "Do you want to install the required packages? [y/N]: " install_packages
 if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
-    echo -e "$CNT - Updating /etc/pacman.conf to include arcolinux repositories... "
-    # Add repository configurations to pacman.conf
-    sudo bash -c 'echo -e "[arcolinux_repo_testing]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
-    sudo bash -c 'echo -e "[arcolinux_repo]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
-    sudo bash -c 'echo -e "[arcolinux_repo_3party]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
-    sudo bash -c 'echo -e "[arcolinux_repo_xlarge]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
-    # Move mirrorlist files to their proper location
-    echo -e "$CNT - Placing mirrorlists... "
-    sudo cp ./etc/pacman.d/arcolinux-mirrorlist /etc/pacman.d/
+    read -rp "Do you need to set up the Arcolinux Repos? [y/N]: " arco
+    if [[ $arco == "Y" || $arco == "y" ]]; then
+        echo -e "$CNT - Updating /etc/pacman.conf to include arcolinux repositories... "
+        # Add repository configurations to pacman.conf
+        sudo bash -c 'echo -e "[arcolinux_repo_testing]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
+        sudo bash -c 'echo -e "[arcolinux_repo]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
+        sudo bash -c 'echo -e "[arcolinux_repo_3party]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
+        sudo bash -c 'echo -e "[arcolinux_repo_xlarge]\nSigLevel = Optional TrustedOnly\nInclude = /etc/pacman.d/arcolinux-mirrorlist\n" >> /etc/pacman.conf'
+        # Move mirrorlist files to their proper location
+        echo -e "$CNT - Placing mirrorlists... "
+        sudo cp ./etc/pacman.d/arcolinux-mirrorlist /etc/pacman.d/
+    else
+        echo -e "$CNT - Arcolinux Repos in place, or skipped"
+    fi
 
     # Update Paru databases
     echo -e "$CNT - Updating Paru databases... " 
