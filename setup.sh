@@ -47,7 +47,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Update Paru databases
     echo -e "$CNT - Updating Paru databases... " 
-    paru -Sy --noconfirm
+    paru -Sy
 
     # Install Waybar
     echo -e "$CNT - Installing Waybar... " 
