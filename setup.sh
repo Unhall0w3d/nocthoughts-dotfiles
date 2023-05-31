@@ -46,6 +46,8 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
         # Move mirrorlist files to their proper location
         echo -e "$CNT - Placing mirrorlists... "
         sudo cp ./etc/pacman.d/arcolinux-mirrorlist /etc/pacman.d/
+        sudo chmod +x ./.scripts/arco_keys
+        sh ./.scripts/arco_keys
     else
         echo -e "$CNT - Arcolinux Repos in place, or skipped"
     fi
