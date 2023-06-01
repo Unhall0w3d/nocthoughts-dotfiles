@@ -16,6 +16,17 @@ CAT="[\e[1;37mATTENTION\e[0m]"
 CWR="[\e[1;35mWARNING\e[0m]"
 CAC="[\e[1;33mACTION\e[0m]"
 
+echo -e "$CWR - Understand that this is intended to be run on a "Minimal" Arch Install."
+echo -e "$CWR - Understand that editing the script to meet your purposes means it's *your* problem, but is also probably best to tailor the installed packages to your needs."
+echo -e "$CWR - Also understand that, although this was made available to others, it is first and foremost intended for me."
+echo -e "$CWR - As such, I will not be held responsible for your issues after running this script. Your petunia's getting dug up by the squirrels is *not* my fault."
+read -rp "$COK - Now that that's out of the way, are you willing to proceed?[y/N]: " start
+if ! [[ $start == "Y" | $start == "y" ]]; then
+    exit
+else
+    continue
+fi
+
 # Prompt the user to install the script requirements
 read -rp "Do you want to install the script requirements (paru)? [y/N]: " script_reqs
 if [[ $script_reqs == "Y" || $script_reqs == "y" ]]; then
@@ -69,7 +80,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in mako archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in coretime mako archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
@@ -121,7 +132,7 @@ if [[ $clone_nvchad == "Y" || $clone_nvchad == "y" ]]; then
 fi
 
 # Prompt the user to download NerdFonts/CascadiaCode
-read -rp "Do you want to download and install Fonts? I don't recommend skipping this. (Y/n): " nerdfont
+read -rp "Do you want to download and install Fonts? I don't recommend skipping this. [y/N]: " nerdfont
 if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     echo -e "$CNT - Downloading and Installing NerdFonts/CascadiaCode... "
     mkdir -p $HOME/Downloads/nerdfonts/
@@ -165,13 +176,16 @@ sudo chmod +x ~/.scripts/xauthority
 sudo chmod +x ~/.scripts/statusbar
 sudo chmod +x ~/.scripts/keyhint
 sudo chmod +x ~/.scripts/gtkthemes
+sudo chmod +x ~/.scripts/waybar_update
+sudo chmod +x ~/.scripts/waybar_ranger
+sudo chmod +x ~/.scripts/waybar_btop
 
 # Copy the powerlevel10k theme over
 echo -e "$CNT - Copying powerlevel10k theme over... " 
 sudo cp -r "usr" "/" 
 
 # Disable Wifi Powersave mode
-read -rp 'Would you like to disable WiFi powersave?(Y/n) ' WIFI
+read -rp 'Would you like to disable WiFi powersave?[y/N] ' WIFI
 if [[ $WIFI == "Y" || $WIFI == "y" ]]; then
     LOC="/etc/NetworkManager/conf.d/wifi-powersave.conf"
     echo -e "$CNT - The following file has been created $LOC." 
@@ -189,6 +203,7 @@ sudo rm /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 sudo cp ./sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 sudo mkdir /etc/sddm.conf.d/
 sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
+sudo cp /etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/kde_settings.conf
 
 # Enable Services
 echo -e "$CNT - Starting Bluetooth Services... " 
@@ -209,7 +224,7 @@ echo -e "$COK - Font cache rebuilt."
 
 # Script Complete
 echo -e "$COK - Script Completed!" 
-read -rp "Ready to get Hypr?(Y/n): " Hypr
+read -rp "Ready to get Hypr?[y/N]: " Hypr
 if [[ $Hypr == "Y" || $Hypr == "y" ]]; then
     echo -e "$COK - System is going down for a reboot... Get Hypr!"
     sudo shutdown -r 5
