@@ -109,7 +109,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
             echo -e "$CNT - $pkg is already installed" 
         fi
     done
-    
+
     # Install Waybar
     echo -e "$CNT - Installing Waybar... " 
     paru -S --needed --noconfirm gcc12
@@ -142,6 +142,7 @@ if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
     echo -e "$CNT - Resetting Font Cache... "
     fc-cache -rv
+fi
 
 # Define the folders and files to copy
 folders_to_copy=(".cache" ".config" ".zsh" "Backgrounds" ".scripts")
