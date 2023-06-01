@@ -20,7 +20,8 @@ echo -e "$CWR - Understand that this is intended to be run on a "Minimal" Arch I
 echo -e "$CWR - Understand that editing the script to meet your purposes means it's *your* problem, but is also probably best to tailor the installed packages to your needs."
 echo -e "$CWR - Also understand that, although this was made available to others, it is first and foremost intended for me."
 echo -e "$CWR - As such, I will not be held responsible for your issues after running this script. Your petunia's getting dug up by the squirrels is *not* my fault."
-read -rp "$COK - Now that that's out of the way, are you willing to proceed?[y/N]: " start
+echo -e "$COK - Now that that's out of the way..."
+read -rp "Are you willing to proceed?[y/N]: " start
 if ! [[ $start == "Y" | $start == "y" ]]; then
     exit
 else
