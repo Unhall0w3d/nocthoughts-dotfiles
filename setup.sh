@@ -24,8 +24,6 @@ echo -e "$COK - Now that that's out of the way..."
 read -rp "Are you willing to proceed?[y/N]: " start
 if ! [[ $start == "Y" || $start == "y" ]]; then
     exit
-else
-    continue
 fi
 
 # Prompt the user to install the script requirements
@@ -110,6 +108,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
+    done
     
     # Install Waybar
     echo -e "$CNT - Installing Waybar... " 
