@@ -22,7 +22,7 @@ echo -e "$CWR - Also understand that, although this was made available to others
 echo -e "$CWR - As such, I will not be held responsible for your issues after running this script. Your petunia's getting dug up by the squirrels is *not* my fault."
 echo -e "$COK - Now that that's out of the way..."
 read -rp "Are you willing to proceed?[y/N]: " start
-if ! [[ $start == "Y" | $start == "y" ]]; then
+if ! [[ $start == "Y" || $start == "y" ]]; then
     exit
 else
     continue
