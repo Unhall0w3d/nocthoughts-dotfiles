@@ -20,12 +20,12 @@
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
+    background: rgba(68, 68, 68, 0.6);
     border-radius: 999px;
 }
 
 tooltip {
-	background: #2e2323;
+	background: #4444cc;
 	opacity: 0.2;
 	border-radius: 10px;
 	border-width: 2px;
