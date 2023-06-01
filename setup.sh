@@ -228,7 +228,8 @@ echo -e "$COK - Script Completed!"
 read -rp "Ready to get Hypr?[y/N]: " Hypr
 if [[ $Hypr == "Y" || $Hypr == "y" ]]; then
     echo -e "$COK - System is going down for a reboot... Get Hypr!"
-    sudo shutdown -r 5
+    sleep 5
+    sudo shutdown -r 0
 else
   exit
 fi
