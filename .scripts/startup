@@ -10,14 +10,14 @@ for _prs in "${_ps[@]}"; do
     fi
 done
 
+# Start Waybar
+${SCRIPTSDIR}/statusbar &
+
 # Apply Themes
 ${SCRIPTSDIR}/gtkthemes &
 
-# Apply Themes
+# Start Notifications
 ${SCRIPTSDIR}/notifications &
 
-# Apply Themes
-${SCRIPTSDIR}/statusbar &
-
-# Xauthority
+# Establish Xauthority
 ${SCRIPTSDIR}/xauthority &

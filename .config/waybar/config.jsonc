@@ -43,10 +43,10 @@
           }
     },
     // "cpu": {
-    //     "interval": 10,
-    //     "format": " {}%",
-    //     "max-length": 10,
-    //     "on-click": ""
+    //      "interval": 10,
+    //      "format": " {}%",
+    //      "max-length": 10,
+    //      "on-click": ""
     // },
     // "memory": {
     //     "interval": 30,

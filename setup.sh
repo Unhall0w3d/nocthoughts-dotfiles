@@ -61,7 +61,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     for pkg in hyprland-dev wezterm swaylock-effects swaybg wofi wlogout rofi rofi-emoji mako xdg-desktop-portal-hyprland swappy grimblast-git slurp thunar xorg-xhost python python-pip python-pyxdg xorg-bdftopcf xorg-fonts-encodings xorg-iceauth xorg-mkfontscale xorg-server xorg-server-common xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbprint xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-refresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwayland xorg-xwd xorg-xwininfo xorg-xwud xorgproto; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --noconfirm "$pkg"
+            paru -Sy --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -69,10 +69,10 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in mpv wget polkit-gnome pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in mako archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --noconfirm "$pkg"
+            paru -Sy --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -80,10 +80,10 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Installing ZSH and related plugins
     echo -e "$CNT - Installing zsh, plugins... " 
-    for pkg in zsh oh-my-zsh-git zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc zsh-history-substring-search; do
+    for pkg in zsh oh-my-zsh-git zsh-syntax-highlighting zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc zsh-history-substring-search; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --noconfirm "$pkg"
+            paru -Sy --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -94,16 +94,16 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     for pkg in arcolinux-candy-beauty-git wtype colord qt5-wayland qt6-wayland sweet-cursors-theme-git sweet-folders-icons-git sweet-gtk-theme-dark sweet-kvantum-theme-git kvantum nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git arcolinux-sddm-sugar-candy-git lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --noconfirm "$pkg"
+            paru -Sy --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
     
     # Install Waybar
     echo -e "$CNT - Installing Waybar... " 
-    paru -S --noconfirm gcc12
+    paru -S --needed --noconfirm gcc12
     export CC=gcc-12 CXX=g++-12
-    paru -S --noconfirm waybar-hyprland-git 
+    paru -S --needed --noconfirm waybar-hyprland-git 
     echo -e "$CNT - Waybar installed."
 
     # Install Python Module - Requests. Required for weather display on Waybar.
@@ -113,7 +113,6 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     done
 fi
 
-
 # Prompt the user to clone the NvChad repository
 read -rp "Do you want to clone the NvChad repository? [y/N]: " clone_nvchad
 if [[ $clone_nvchad == "Y" || $clone_nvchad == "y" ]]; then
@@ -122,19 +121,20 @@ if [[ $clone_nvchad == "Y" || $clone_nvchad == "y" ]]; then
 fi
 
 # Prompt the user to download NerdFonts/CascadiaCode
-read -rp "Do you want to download and install NerdFonts/CascadiaCode?(Y/n): " nerdfont
+read -rp "Do you want to download and install Fonts? I don't recommend skipping this. (Y/n): " nerdfont
 if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     echo -e "$CNT - Downloading and Installing NerdFonts/CascadiaCode... "
     mkdir -p $HOME/Downloads/nerdfonts/
     cd $HOME/Downloads/ && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip
     unzip 'CascadiaCode.zip' -d $HOME/Downloads/nerdfonts/ && rm CascadiaCode.zip
     sudo cp -r $HOME/Downloads/nerdfonts/ /usr/share/fonts/ && sudo rm -r $HOME/Downloads/nerdfonts/
+    paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
     echo -e "$CNT - Resetting Font Cache... "
     fc-cache -rv
 
 # Define the folders and files to copy
 folders_to_copy=(".cache" ".config" ".zsh" "Backgrounds" ".scripts")
-files_to_copy=(".zshrc" ".p10k.zsh")
+files_to_copy=(".zshenv" ".p10k.zsh")
 
 # Prompt the user to copy the folders and files
 read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
