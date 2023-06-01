@@ -11,7 +11,7 @@ return {
 	-- OpenGL for GPU acceleration, Software for CPU
 	front_end = "OpenGL",
 
-	color_scheme = 'Catppuccin Mocha',
+	color_scheme = 'rose-pine-moon',
 
 	-- Font config
 	font = font_with_fallback(font_name),
