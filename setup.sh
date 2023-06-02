@@ -45,6 +45,7 @@ fi
 # Prompt the user to install the packages
 read -rp "Do you want to install the required packages? [y/N]: " install_packages
 if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
+    echo -e "$CWR - ONLY SAY "N" IF YOU DON'T HAVE THEM ALREADY."
     read -rp "Do you need to set up the Arcolinux Repos? [y/N]: " arco
     if [[ $arco == "Y" || $arco == "y" ]]; then
         echo -e "$CNT - Updating /etc/pacman.conf to include arcolinux repositories... "
