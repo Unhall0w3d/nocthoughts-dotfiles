@@ -32,9 +32,6 @@ pacman -Sy git
 4. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
-5. Re-install Paru
-    a. Because you won't have the paru completions, you can solve it or you can do a dance of compiling yay, using yay to remove paru, reinstall paru using yay, then uninstall yay.
-    b. Whatever works for you. I didn't handle this part, but may in the future.
 ```
 
 # Installation
