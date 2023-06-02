@@ -115,6 +115,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     echo -e "$CNT - Installing Waybar... " 
     paru -S --needed --noconfirm gcc12
     export CC=gcc-12 CXX=g++-12
+    echo -e "$CNT - You will need to press "Y", then "Y" to proceed.
     paru -S --needed --noconfirm waybar-hyprland-git 
     echo -e "$CNT - Waybar installed."
 
