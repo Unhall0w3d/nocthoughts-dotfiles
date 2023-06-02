@@ -201,7 +201,7 @@ fi
 echo -e "$CNT - Setting up SDDM Background... "
 sudo cp -r sddm_theme/ /usr/share/sddm/themes
 sudo rm /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
-sudo cp ./sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
+sudo cp ./sddm_theme/Backgrounds/1195480.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
 sudo cp /etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/kde_settings.conf
 
