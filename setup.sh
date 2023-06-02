@@ -109,7 +109,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Installing theme utilities, themes, icons, fonts
     echo -e "$CNT - Installing themes, theme utilities... " 
-    for pkg in arcolinux-candy-beauty-git wtype colord qt5-wayland qt6-wayland sweet-cursors-theme-git sweet-folders-icons-git sweet-gtk-theme-dark sweet-kvantum-theme-git kvantum nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git arcolinux-sddm-sugar-candy-git lxappearance; do
+    for pkg in tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-grub-theme-default-1080p graphite-gtk-theme-git graphite nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git arcolinux-sddm-sugar-candy-git lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
