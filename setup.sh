@@ -67,6 +67,14 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     echo -e "$CNT - Updating Paru databases... " 
     paru -Sy
 
+    # Install Waybar
+    echo -e "$CNT - Installing Waybar... " 
+    paru -S --needed --noconfirm gcc12
+    export CC=gcc-12 CXX=g++-12
+    echo -e "$CNT - You will need to press "Y", then "Y" to proceed."
+    paru -S --needed --noconfirm waybar-hyprland-git 
+    echo -e "$CNT - Waybar installed."
+
     # Installing Core Components
     echo -e "$CNT - Installing main components... " 
     for pkg in hyprland-dev wezterm swaylock-effects swaybg wofi wlogout rofi rofi-emoji mako xdg-desktop-portal-hyprland swappy grimblast-git slurp thunar xorg-xhost python python-pip python-pyxdg xorg-bdftopcf xorg-fonts-encodings xorg-iceauth xorg-mkfontscale xorg-server xorg-server-common xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbprint xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-refresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwayland xorg-xwd xorg-xwininfo xorg-xwud xorgproto; do
@@ -110,14 +118,6 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
             echo -e "$CNT - $pkg is already installed" 
         fi
     done
-
-    # Install Waybar
-    echo -e "$CNT - Installing Waybar... " 
-    paru -S --needed --noconfirm gcc12
-    export CC=gcc-12 CXX=g++-12
-    echo -e "$CNT - You will need to press "Y", then "Y" to proceed.
-    paru -S --needed --noconfirm waybar-hyprland-git 
-    echo -e "$CNT - Waybar installed."
 
     # Install Python Module - Requests. Required for weather display on Waybar.
     echo -e "$CNT - Installing python module 'requests' via pip... "
