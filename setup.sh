@@ -87,7 +87,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in coretime mako exa archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in coretime mako exa vlc bat archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
@@ -109,7 +109,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Installing theme utilities, themes, icons, fonts
     echo -e "$CNT - Installing themes, theme utilities... " 
-    for pkg in tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-grub-theme-default-1080p graphite-gtk-theme-git graphite nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git arcolinux-sddm-sugar-candy-git lxappearance; do
+    for pkg in tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-grub-theme-default-1080p graphite-gtk-theme-git graphite nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
@@ -138,8 +138,6 @@ if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     unzip 'CascadiaCode.zip' -d ./nerdfonts/ && rm CascadiaCode.zip
     sudo cp -r ./nerdfonts/ /usr/share/fonts/ && sudo rm -r ./nerdfonts/
     paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
-    echo -e "$CNT - Resetting Font Cache... "
-    fc-cache -rv
     sleep 5
 fi
 
@@ -214,7 +212,7 @@ echo -e "$COK - Font cache rebuilt."
 
 # Script Complete
 echo -e "$COK - Script Completed!" 
-read -rp "Ready to get Hypr?[y/N]: " Hypr
+read -rp "Ready to Get Hypr?[y/N]: " Hypr
 if [[ $Hypr == "Y" || $Hypr == "y" ]]; then
     echo -e "$COK - System is going down for a reboot... Get Hypr!"
     sleep 5

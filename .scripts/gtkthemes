@@ -1,11 +1,10 @@
 #!/bin/bash
-
 # Set GTK Themes, Icons, Cursor and Fonts
 
-THEME='Sweet-Dark'
-ICONS='arcolinux-candy-beauty'
+THEME='Graphite-Dark'
+ICONS='Tela-circle-black-dark'
 FONT='CascaydiaCove NF 11'
-CURSOR='Sweet-cursors'
+CURSOR='Graphite-dark-cursors'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
 

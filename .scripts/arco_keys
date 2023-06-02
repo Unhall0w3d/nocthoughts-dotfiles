@@ -1,4 +1,5 @@
 #!/bin/bash
+# Add Keys for access to the Arcolinux Repositories.
 
 #Erik key
 sudo pacman-key --recv-keys 74F5DE85A506BF64

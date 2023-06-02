@@ -19,24 +19,22 @@ pacman -Sy git
 # Recommendations
 
 ```text
-1. I recommend updating the ~/.config/hypr/hyprland.conf monitor configs to match your layout.
-    a. As-is the monitor layout is two stacked "landscape" 1920x1080@144 monitors, with a 1920x1080@60 "portrait" monitor to the left.
-2. SUPER+ENTER to launch Wezterm. You'll need to change your shell to zsh.
+1. SUPER+ENTER to launch Wezterm. You'll need to change your shell to zsh.
     a. sudo chsh <username> -s $(which zsh)
     b. Restart for the shell change to take effect, or source the .zshrc file.a
     c. Re-open Wezterm, with zsh as the prompt, and it should run through some plugin setup.
-3. nvim/NvChad setup
+2. nvim/NvChad setup
     a. Set up nvchad/nvim by typing 'nvim' and walk through the setup.
-4. Review ~/.conf/hypr/hyprland.conf regarding "xhost +" script that is invoked.
+3. Review ~/.conf/hypr/hyprland.conf regarding "xhost +" script that is invoked.
     a. This was used to fix some programs (Gtk primarily). If it's too insecure for you, pursue an alternative solution.
     b. Comment out the line, or remove it and the corresponding script file it points to.
     c. Otherwise, leave it alone.
-5. Install "ruby" >= 2.60
+4. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
-6. Re-install Paru
+5. Re-install Paru
     a. Because you won't have the paru completions, you can solve it or you can do a dance of compiling yay, using yay to remove paru, reinstall paru using yay, then uninstall yay.
-    b. Whatever works for you.
+    b. Whatever works for you. I didn't handle this part, but may in the future.
 ```
 
 # Installation
@@ -60,6 +58,6 @@ chmod +x setup.sh
 
 Credits will change as the dotfiles and theming change and are hand customized away from presets cobbled together from others. Regardless, I wouldn't have this setup without the efforts and available materials of others. Thank you.
 
-[LinuxMobile](https://github.com/linuxmobile) - hyprland-dots repo, various configs, some zsh goodies
-[SolDoesTech](https://github.com/SolDoesTech) - sddm theme base (sdt), some config/layout decisions, bash script inspiration (I knew python, didn't know bash scripting and bash performed much better. Seeing an example of how it was done, and borrowing some elements, got this working beautifully.)
+[LinuxMobile](https://github.com/linuxmobile) - some configs, some zsh goodies
+[SolDoesTech](https://github.com/SolDoesTech) - sddm theme base (sdt), some config/layout decisions, bash script inspiration.
 As well as the authors/maintainers of the packages installed via the script, Arch itself, etc. You know who you are.
