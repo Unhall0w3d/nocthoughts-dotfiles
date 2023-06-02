@@ -1,7 +1,7 @@
 # DO NOT EDIT! This file will be overwritten by nwg-look.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-include "/home/ken/.gtkrc-2.0.mine"
+include "$HOME/.gtkrc-2.0.mine"
 gtk-theme-name="Graphite-Dark"
 gtk-icon-theme-name="Tela-circle-black-dark"
 gtk-font-name="CaskaydiaCove NF 11"
