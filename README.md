@@ -49,7 +49,7 @@ chmod +x setup.sh
 
 # Screenshots
 
-[My RIP (Rice-In-Progress)](https://imgur.com/a/mM3YFSA)
+[My RIP (Rice-In-Progress)](https://imgur.com/a/BlS3xBe)
 
 # Credits
 
