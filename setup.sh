@@ -141,6 +141,7 @@ if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
     echo -e "$CNT - Resetting Font Cache... "
     fc-cache -rv
+    sleep 5
 fi
 
 # Define the folders and files to copy
@@ -152,12 +153,12 @@ read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
 if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
         echo -e "$CNT - Copying folder $folder... " 
-        cp -r "$folder" ~/ 
+        sudo cp -r "$folder" ~/ 
     done
 
     for file in "${files_to_copy[@]}"; do
         echo -e "$CNT - Copying file $file... " 
-        cp "$file" ~/ 
+        sudo cp "$file" ~/ 
     done
 
     echo -e "$CNT - Config files have been moved." 
