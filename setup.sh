@@ -135,7 +135,7 @@ read -rp "Do you want to download and install Fonts? I don't recommend skipping 
 if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     echo -e "$CNT - Downloading and Installing NerdFonts/CascadiaCode... "
     mkdir -p $HOME/Downloads/nerdfonts/
-    cd $HOME/Downloads/ && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip
     unzip 'CascadiaCode.zip' -d $HOME/Downloads/nerdfonts/ && rm CascadiaCode.zip
     sudo cp -r $HOME/Downloads/nerdfonts/ /usr/share/fonts/ && sudo rm -r $HOME/Downloads/nerdfonts/
     paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
@@ -202,7 +202,6 @@ echo -e "$CNT - Setting up SDDM Background... "
 sudo cp -r sddm_theme/ /usr/share/sddm/themes
 sudo rm /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 sudo cp ./sddm_theme/Backgrounds/wallpaper-dark.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
-sudo mkdir /etc/sddm.conf.d/
 sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
 sudo cp /etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/kde_settings.conf
 
