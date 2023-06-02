@@ -120,8 +120,6 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     # Install Python Module - Requests. Required for weather display on Waybar.
     echo -e "$CNT - Installing python module 'requests' via pip... "
     pip install requests
-
-    done
 fi
 
 # Prompt the user to clone the NvChad repository
