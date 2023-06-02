@@ -134,10 +134,9 @@ fi
 read -rp "Do you want to download and install Fonts? I don't recommend skipping this. [y/N]: " nerdfont
 if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
     echo -e "$CNT - Downloading and Installing NerdFonts/CascadiaCode... "
-    mkdir -p $HOME/Downloads/nerdfonts/
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip
-    unzip 'CascadiaCode.zip' -d $HOME/Downloads/nerdfonts/ && rm CascadiaCode.zip
-    sudo cp -r $HOME/Downloads/nerdfonts/ /usr/share/fonts/ && sudo rm -r $HOME/Downloads/nerdfonts/
+    unzip 'CascadiaCode.zip' -d ./nerdfonts/ && rm CascadiaCode.zip
+    sudo cp -r ./nerdfonts/ /usr/share/fonts/ && sudo rm -r ./nerdfonts/
     paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
     echo -e "$CNT - Resetting Font Cache... "
     fc-cache -rv
@@ -145,15 +144,15 @@ if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
 fi
 
 # Define the folders and files to copy
-folders_to_copy=(".cache" ".config" ".zsh" "Backgrounds" ".scripts")
-files_to_copy=(".zshenv" ".p10k.zsh")
+folders_to_copy=(".scripts" ".config" ".zsh" "Backgrounds" ".cache")
+files_to_copy=(".zshenv" ".p10k.zsh" ".gtkrc-2.0")
 
 # Prompt the user to copy the folders and files
 read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
 if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
         echo -e "$CNT - Copying folder $folder... " 
-        sudo cp -r "$folder" ~/ 
+        sudo cp -r "$folder" ~/
     done
 
     for file in "${files_to_copy[@]}"; do
@@ -161,25 +160,16 @@ if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
         sudo cp "$file" ~/ 
     done
 
-    echo -e "$CNT - Config files have been moved." 
+    echo -e "$CNT - Config files have been moved."
+    echo -e "$CNT - Setting File Permissions."
+    # Set Scripts Executable
+    echo -e "$CNT - Setting scripts to executable... " 
+    
+    sudo chmod +x $HOME/.scripts/*
+
 fi
 
-# Set Scripts Executable
-echo -e "$CNT - Setting scripts to executable... " 
-sudo chmod +x ~/.scripts/colorpicker 
-sudo chmod +x ~/.scripts/IOMMU.sh 
-sudo chmod +x ~/.scripts/screensht
-sudo chmod +x ~/.scripts/xhost.sh
-sudo chmod +x ~/.scripts/notifications
-sudo chmod +x ~/.scripts/startup
-sudo chmod +x ~/.scripts/wofi-beats
-sudo chmod +x ~/.scripts/xauthority
-sudo chmod +x ~/.scripts/statusbar
-sudo chmod +x ~/.scripts/keyhint
-sudo chmod +x ~/.scripts/gtkthemes
-sudo chmod +x ~/.scripts/waybar_update
-sudo chmod +x ~/.scripts/waybar_ranger
-sudo chmod +x ~/.scripts/waybar_btop
+
 
 # Copy the powerlevel10k theme over
 echo -e "$CNT - Copying powerlevel10k theme over... " 
