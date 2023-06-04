@@ -116,7 +116,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Installing theme utilities, themes, icons, fonts
     echo -e "$CNT - Installing themes, theme utilities... " 
-    for pkg in tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-grub-theme-default-1080p graphite-gtk-theme-git graphite nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git lxappearance; do
+    for pkg in qt5-base qt5-declarative qt5-graphcaleffects qt5-imageformats qt5-location qt5-multimedia qt5-quickcontrols qt5-quickcontrols2 qt5-speech qt5-styleplugins qt5-svg qt5-tools qt5-translations qt5-virtualkeyboard qt5-wayland qt5-webchannel qt5-webengine qt5-x11extras tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-grub-theme-default-1080p graphite-gtk-theme-git graphite nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
@@ -165,6 +165,7 @@ if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
         cp "$file" $HOME
         sudo chown $USER $HOME/$file
     done
+    echo -e "$CNT - Copying file .gtkrc-2.0 to $HOME"
     cp .gtkrc-2.0 $HOME/.gtkrc-2.0
     echo -e "$CNT - Config files have been moved... "
     echo -e "$CNT - Setting File Permissions... "
@@ -200,7 +201,7 @@ sudo cp ./sddm_theme/Backgrounds/1195480.jpg /usr/share/sddm/themes/sddm_theme/w
 sudo mkdir /etc/sddm.conf.d
 sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
 sudo cp /etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/kde_settings.conf
-QT_QPA_PLATFORMTHEME=qt5ct; export QT_QPA_PLATFORMTHEME
+sudo echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
 
 # Enable Services
 echo -e "$CNT - Starting Bluetooth Services... " 
