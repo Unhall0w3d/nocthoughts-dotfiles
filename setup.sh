@@ -1,4 +1,11 @@
 #!/bin/bash
+
+#                                                                
+#                                                                
+#    )    )    )    )    )    )    )
+# ( /( ( /( ( /( ( /( ( /( ( /( ( /(
+# )\()))\()))\()))\()))\()))\()))\())
+#((_)\((_)\((_)\((_)\((_)\((_)\((_)\\
 #####################################
 # Script created by Ken Perry, 2023 #
 #       NOC THOUGHTS BLOG           #
@@ -143,7 +150,7 @@ fi
 
 # Define the folders and files to copy
 folders_to_copy=(".scripts" ".config" ".zsh" "Backgrounds" ".cache")
-files_to_copy=(".zshenv" ".p10k.zsh" ".gtkrc-2.0")
+files_to_copy=(".zshenv" ".p10k.zsh" ".gtkrc-2.0", ".profile")
 
 # Prompt the user to copy the folders and files
 read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
