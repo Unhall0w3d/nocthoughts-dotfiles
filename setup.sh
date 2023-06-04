@@ -94,7 +94,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in coretime mako exa vlc bat brave qt5-styleplugins qt5ct strawberry-qt5 archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in coretime mako exa webkit2gtk webkit2gtk-4.1 webkit2gtk-5.0 qemu-desktop dnsmasq virt-viewer virt-manager vlc bat brave-bin qt5-styleplugins qt5ct strawberry-qt5 archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
@@ -153,7 +153,7 @@ folders_to_copy=(".scripts" ".config" ".zsh" "Backgrounds" ".cache")
 files_to_copy=(".zshenv" ".p10k.zsh", ".profile")
 
 # Prompt the user to copy the folders and files
-read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
+read -rp "Do you want to copy the folders and config files? [y/N]: " copy_files
 if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
         echo -e "$CNT - Copying folder $folder... "
@@ -174,8 +174,6 @@ if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     sudo chmod +x $HOME/.scripts/*
 
 fi
-
-
 
 # Copy the powerlevel10k theme over
 echo -e "$CNT - Copying powerlevel10k theme over... " 
@@ -198,9 +196,6 @@ echo -e "$CNT - Setting up SDDM Background... "
 sudo cp -r sddm_theme/ /usr/share/sddm/themes
 sudo rm /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
 sudo cp ./sddm_theme/Backgrounds/1195480.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
-sudo mkdir /etc/sddm.conf.d
-sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
-sudo cp /etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/kde_settings.conf
 sudo echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
 
 # Enable Services
