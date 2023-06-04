@@ -94,7 +94,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in coretime mako exa webkit2gtk webkit2gtk-4.1 webkit2gtk-5.0 qemu-desktop dnsmasq virt-viewer virt-manager vlc bat brave-bin qt5-styleplugins qt5ct strawberry-qt5 archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in coretime mako exa eww webkit2gtk webkit2gtk-4.1 webkit2gtk-5.0 qemu-desktop dnsmasq virt-viewer virt-manager vlc bat brave-bin qt5-styleplugins qt5ct strawberry-qt5 archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
             paru -Sy --needed --noconfirm "$pkg"
