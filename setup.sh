@@ -150,21 +150,22 @@ fi
 
 # Define the folders and files to copy
 folders_to_copy=(".scripts" ".config" ".zsh" "Backgrounds" ".cache")
-files_to_copy=(".zshenv" ".p10k.zsh" ".gtkrc-2.0", ".profile")
+files_to_copy=(".zshenv" ".p10k.zsh", ".profile")
 
 # Prompt the user to copy the folders and files
 read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
 if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
         echo -e "$CNT - Copying folder $folder... "
-        sudo cp -r "$folder" ~/
+        sudo cp -r "$folder" $HOME
     done
 
     for file in "${files_to_copy[@]}"; do
         echo -e "$CNT - Copying file $file... " 
-        sudo cp "$file" ~/ 
+        cp "$file" $HOME
+        sudo chown $USER $HOME/$file
     done
-
+    cp .gtkrc-2.0 $HOME/.gtkrc-2.0
     echo -e "$CNT - Config files have been moved... "
     echo -e "$CNT - Setting File Permissions... "
     # Set Scripts Executable
@@ -199,13 +200,13 @@ sudo cp ./sddm_theme/Backgrounds/1195480.jpg /usr/share/sddm/themes/sddm_theme/w
 sudo mkdir /etc/sddm.conf.d
 sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
 sudo cp /etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/kde_settings.conf
-export QT_QPA_PLATFORMTHEME=qt5ct
+QT_QPA_PLATFORMTHEME=qt5ct; export QT_QPA_PLATFORMTHEME
 
 # Enable Services
 echo -e "$CNT - Starting Bluetooth Services... " 
 sudo systemctl enable --now bluetooth.service 
 sleep 2
-echo -e "$COK - Bluetooth started successfully." 
+echo -e "$COK - Bluetooth started successfully."
 echo -e "$CNT - Starting SDDM Services... " 
 sudo systemctl enable sddm 
 sleep 2
