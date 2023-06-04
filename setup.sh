@@ -149,7 +149,7 @@ files_to_copy=(".zshenv" ".p10k.zsh" ".gtkrc-2.0")
 read -rp "Do you want to copy the folders and files? [y/N]: " copy_files
 if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
-        echo -e "$CNT - Copying folder $folder... " 
+        echo -e "$CNT - Copying folder $folder... "
         sudo cp -r "$folder" ~/
     done
 
@@ -158,11 +158,10 @@ if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
         sudo cp "$file" ~/ 
     done
 
-    echo -e "$CNT - Config files have been moved."
-    echo -e "$CNT - Setting File Permissions."
+    echo -e "$CNT - Config files have been moved... "
+    echo -e "$CNT - Setting File Permissions... "
     # Set Scripts Executable
     echo -e "$CNT - Setting scripts to executable... " 
-    
     sudo chmod +x $HOME/.scripts/*
 
 fi
