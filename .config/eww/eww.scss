@@ -1,0 +1,55 @@
+* {
+    all: unset; //Unset all
+  }
+
+.bar1, .bar2, .bar3 {
+    background-color: #171717;
+    color: white;
+    font-family: 'CaskaydiaCode NF';
+    font-size: 11px;
+  }
+
+  // Styles for classes
+
+  .bottomstuff slider {
+    all: unset;
+    color: lightgray;
+  }
+
+  .metric scale trough highlight {
+    all: unset;
+    background-color: rgba(81, 164, 231, 0.67);
+    color: #000000;
+    border-radius:10px;
+  }
+  .metric scale trough {
+    all: unset;
+    background-color: rgb(111, 111, 112);
+    border-radius: 50px;
+    min-height: 3px;
+    min-width: 50px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .metric scale trough highlight {
+    all: unset;
+    background-color: rgba(81, 164, 231, 0.67);
+    color: #000000;
+    border-radius: 10px;
+  }
+  .metric scale trough {
+    all: unset;
+    background-color: rgb(111, 111, 112);
+    border-radius: 50px;
+    min-height: 3px;
+    min-width: 50px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+
+  .label-ram {
+    font-size: large;
+  }
+  .workspaces button:hover {
+    color: rgba(81, 164, 231, 0.3);
+  }

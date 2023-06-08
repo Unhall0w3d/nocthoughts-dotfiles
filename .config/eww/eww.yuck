@@ -1,0 +1,99 @@
+(defwidget bar []
+  (centerbox :orientation "vertical"
+    (workspaces)
+    (music)
+    (bottomstuff)))
+
+(defwindow bar1 :monitor 0
+                :windowtype "dock"
+                :stacking "fg"
+                :reserve (struts :side "left" 
+                                 :distance "5%")  
+                :geometry (geometry :x "0%"
+                                    :y "0%"
+                                    :width "40px"
+                                    :height "90%"
+                                    :anchor "left center")
+(bar))
+
+(defwindow bar2 :monitor 1 
+                :stacking "fg" 
+                :windowtype "dock"
+                :reserve (struts :side "left" 
+                                 :distance "5%")  
+                :geometry (geometry :x "0%"
+                                    :y "0%"
+                                    :width "40px"
+                                    :height "90%"
+                                    :anchor "left center")
+(bar))
+
+(defwindow bar3 :monitor 2 
+                :stacking "fg" 
+                :windowtype "dock"
+                :reserve (struts :side "left" 
+                                 :distance "5%")  
+                :geometry (geometry :x "0%"
+                                    :y "0%"
+                                    :width "40px"
+                                    :height "90%"
+                                    :anchor "left center")
+(bar))
+
+(defwidget workspaces []
+  (eventbox :onscroll "sh -c 'if [ \"{}\" = \"up\" ]; then hyprctl dispatch workspace $(($(hyprctl activeworkspace | awk -F'[()]' '{print $2}') + 1)); else hyprctl dispatch workspace $(($(hyprctl activeworkspace | awk -F'[()]' '{print $2}') - 1)); fi'"
+    (box :class "workspaces"
+         :orientation "v"
+         :space-evenly true
+         :halign "start"
+         :spacing 10
+      (button :onclick "hyprctl dispatch workspace 1" 1)
+      (button :onclick "hyprctl dispatch workspace 2" 2)
+      (button :onclick "hyprctl dispatch workspace 3" 3)
+      (button :onclick "hyprctl dispatch workspace 4" 4)
+      (button :onclick "hyprctl dispatch workspace 5" 5)
+      (button :onclick "hyprctl dispatch workspace 6" 6))))
+
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    {music != "" ? "🎵${music}" : ""}))
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defwidget bottomstuff []
+  (box :class "bottomstuff" 
+       :orientation "v" 
+       :space-evenly false 
+       :valign "bottom"
+    (eventbox :onscroll "sh -c 'if [ \"{}\" = \"up\" ]; then pamixer -i 5; else pamixer -d 5; fi'"
+      (metric :label "🔊"
+              :value volume
+              :onchange "pamixer --get-volume"))
+    (metric :label ""
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
+    (metric :label "💾"
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")
+    time))
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+(defpoll volume :interval "1s"
+  "scripts/getvol")
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
