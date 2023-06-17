@@ -1,7 +1,7 @@
 #!/bin/bash
 # Set GTK Themes, Icons, Cursor and Fonts
 
-THEME='Graphite-Dark'
+THEME='Materia-dark'
 ICONS='Tela-circle-black-dark'
 FONT='CascaydiaCove NF 11'
 CURSOR='Graphite-dark-cursors'

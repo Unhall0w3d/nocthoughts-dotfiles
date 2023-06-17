@@ -8,9 +8,6 @@
 # | .` | (_) | | |  | || __| \ V /  
 # |_|\_|\___/  |_| |___|_|    |_|   
                                   
-
-CONFIG="$HOME/.config/mako/config"
-
-if [[ ! $(pidof mako) ]]; then
-    mako --config ${CONFIG}
+if [[ ! $(pidof dunst) ]]; then
+    dunst &
 fi

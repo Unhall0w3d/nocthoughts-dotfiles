@@ -20,5 +20,5 @@ ${SCRIPTSDIR}/notifications &
 # Establish Xauthority
 ${SCRIPTSDIR}/xauthority &
 
-# Delete Looking-Glass File
-sudo rm /dev/shm/looking-glass
+# Start Eww
+~/.config/eww/scripts/launch_bar
