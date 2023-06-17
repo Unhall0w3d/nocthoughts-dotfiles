@@ -6,11 +6,11 @@ Arch Linux - Minimal Profile - Pipewire
 
 ## Screenshots
 
-https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A31%3A22%2C850625312-04%3A00.png
+![alt text](https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A31%3A22%2C850625312-04%3A00.png)
 
-https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A36%3A26%2C906794696-04%3A00.png
+![alt text](https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A36%3A26%2C906794696-04%3A00.png)
 
-https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A37%3A55%2C391620600-04%3A00.png
+![alt text](https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A37%3A55%2C391620600-04%3A00.png)
 
 ## Install requirements
 Handled through the script:
