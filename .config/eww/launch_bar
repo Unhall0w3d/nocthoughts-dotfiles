@@ -1,20 +1,4 @@
 #!/bin/zsh
-## Files and cmd
-EWW="eww"
-
-## Run eww daemon if not running already
-if [[ ! $(pidof eww) ]]; then
-    ${EWW} daemon
-    sleep 1
-else
-    eww kill
-fi
-
-dunst &
-
-## Open widgets
-NB_MONITORS=($(hyprctl monitors -j | jq -r '.[] | .id'))
-for i in "${!NB_MONITORS[@]}"; do
-    ${EWW} open bar$i
-    [[ $i == 0 ]] && ${EWW} open-many sidebar notifications
-done
+eww daemon
+sleep 2
+eww open-many bar0 bar1 bar2 sidebar notifications
