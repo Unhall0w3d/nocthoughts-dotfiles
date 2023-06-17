@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #                                                                
 #                                                                
 #    )    )    )    )    )    )    )
@@ -120,6 +119,10 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     # Install Python Module - Requests. Required for weather display on Waybar.
     echo -e "$CNT - Installing python module 'requests' via pip... "
     pip install requests
+    
+    # Install Eww-Wayland
+    echo -e "$CNT - Installing Eww-wayland... "
+    paru -S --noconfirm eww-wayland
 fi
 
 # Prompt the user to clone the NvChad repository
