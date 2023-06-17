@@ -4,6 +4,13 @@ Dotfiles for the NOCThoughts Admin.
 Intended for use on the following system:
 Arch Linux - Minimal Profile - Pipewire
 
+## Screenshots
+
+https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A31%3A22%2C850625312-04%3A00.png
+
+https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A36%3A26%2C906794696-04%3A00.png
+
+https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A37%3A55%2C391620600-04%3A00.png
 
 ## Install requirements
 Handled through the script:
@@ -12,7 +19,6 @@ Handled through the script:
 paru
 git
 ```
-
 
 ## Dependencies
 
@@ -63,15 +69,6 @@ git clone https://github.com/Unhall0w3d/nocthoughts-dotfiles.git
 cd nocthoughts-dotfiles
 ./setup.sh
 ```
-
-## Screenshots
-
-https://github.com/Unhall0w3d/nocthoughts-dotfiles/blob/main/screenshots/2023-06-17T15:31:22,850625312-04:00.png
-
-https://github.com/Unhall0w3d/nocthoughts-dotfiles/blob/main/screenshots/2023-06-17T15:36:26,906794696-04:00.png
-
-https://github.com/Unhall0w3d/nocthoughts-dotfiles/blob/main/screenshots/2023-06-17T15:37:55,391620600-04:00.png
-
 
 ## Credits
 
