@@ -137,7 +137,7 @@ if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
 fi
 
 # Define the folders and files to copy
-folders_to_copy=(".scripts" ".config" ".zsh" "Backgrounds" ".cache")
+folders_to_copy=(".scripts" ".config" ".zsh" "Wallpapers" ".cache")
 files_to_copy=(".zshenv" ".p10k.zsh", ".profile")
 
 # Prompt the user to copy the folders and files
@@ -155,6 +155,7 @@ if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
         sudo chown $USER $HOME/$file
     done
     echo -e "$CNT - Copying file .gtkrc-2.0 to $HOME"
+    cp .p10k.zsh ~/
     cp .gtkrc-2.0 $HOME/.gtkrc-2.0
     echo -e "$CNT - Config files have been moved... "
     echo -e "$CNT - Setting File Permissions... "
@@ -187,7 +188,7 @@ if [ ! -d "$greet" ]; then
     sudo mkdir "$greet"
 fi
 sudo cp ./etc/greetd/config.toml /etc/greetd/
-sudo systemctl enable --now greetd
+sudo systemctl enable greetd
 sleep 2
 echo -e "$OK - Greetd started successfully."
 
@@ -212,6 +213,10 @@ paru -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk xdg-desktop-
 echo -e "$CNT - Rebuilding font cache... " 
 fc-cache -f -v 
 echo -e "$COK - Font cache rebuilt." 
+
+# Setting shell to zsh
+echo -e "$CNT - Changing shell to zsh (/bin/zsh)"
+sudo chsh $USER -s $(which zsh)
 
 # Script Complete
 echo -e "$COK - Script Completed!" 
