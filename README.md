@@ -4,6 +4,11 @@ Dotfiles for the NOCThoughts Admin.
 Intended for use on the following system:
 Arch Linux - Minimal Profile - Pipewire
 
+## NOTE ##
+
+Sometimes 'greetd' doesn't play nice and tries to login with "//.scripts/start_hyprland". It seems to do this regardless of whether "$HOME/.scripts/start_hyprland"
+or "~/.scripts/start_hyprland" is used in the config file for 'greetd'. You'll need to hit "F2" and edit the statement from "//.scripts/start_hyprland" to "~/.scripts/start_hyprland" and then login. I am working on fixing this, and it may be fixed by the time you read this. Just pay attention when logging in through greetd and if the login fails edit the login statement as described.
+
 ## Screenshots
 
 ![alt text](https://raw.githubusercontent.com/Unhall0w3d/nocthoughts-dotfiles/main/screenshots/2023-06-17T15%3A31%3A22%2C850625312-04%3A00.png)
