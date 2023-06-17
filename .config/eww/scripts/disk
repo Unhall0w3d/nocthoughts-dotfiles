@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+# Get the used disk space in blocks
+used_space=$(df --output=used / | tail -n 1)
+
+# Convert blocks to gigabytes (assuming block size is 1K)
+used_space_gb=$((used_space / 1024 / 1024))
+
+# Print the result
+echo $used_space_gb

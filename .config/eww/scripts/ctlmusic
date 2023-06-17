@@ -1,0 +1,39 @@
+#!/bin/zsh
+
+# Check if an argument is passed
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 {-toggle|-next|-previous}"
+    exit 1
+fi
+
+# Map each command to the appropriate playerctl command
+case $1 in
+    -toggle)
+        player_status=$(playerctl status)
+        if [ "$player_status" = "Playing" ]; then
+            playerctl pause
+        elif [ "$player_status" = "Paused" ]; then
+            playerctl play
+        fi
+        ;;
+    -next)
+        playerctl next
+        ;;
+    -previous)
+        playerctl previous
+        ;;
+    -art)
+        playerctl metadata mpris:artUrl
+        ;;
+    -title)
+        playerctl metadata title
+        ;;
+    -artist)
+        playerctl metadata artist
+        ;;
+    *)
+        echo "Invalid command: $1"
+        echo "Usage: $0 {-toggle|-next|-previous|-art|-title|-artist}"
+        exit 1
+        ;;
+esac

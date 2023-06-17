@@ -1,9 +1,9 @@
 # rose-pine-moon
 [colors]
 foreground = "#e5e1f7"
-background = "#2b2c2e"
+background = "#000000"
 cursor_bg = "#e5e1f7"
-cursor_border = "#e5e1f7"
+cursor_border = "#000000"
 cursor_fg = "#e5e1f7"
 selection_bg = "#e5e1f7"
 selection_fg = "#2b2c2e"

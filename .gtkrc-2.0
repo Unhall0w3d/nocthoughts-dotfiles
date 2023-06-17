@@ -1,7 +1,12 @@
-# DO NOT EDIT! This file will be overwritten by nwg-look.
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
-include "$HOME/.gtkrc-2.0.mine"
-gtk-theme-name="Graphite-Dark"
+#   o-o  o-O-o o  o     o-O-o o                  
+#  o       |   | /        |   |                  
+#  |  -o   |   OO         |   O--o o-o o-O-o o-o 
+#  o   |   |   | \        |   |  | |-' | | | |-' 
+#   o-o    o   o  o       o   o  o o-o o o o o-o 
+include "/home/ken/.gtkrc-2.0.mine"
+gtk-theme-name="Materia-dark"
 gtk-icon-theme-name="Tela-circle-black-dark"
 gtk-font-name="CaskaydiaCove NF 11"
 gtk-cursor-theme-name="Graphite-dark-cursors"
@@ -14,5 +19,5 @@ gtk-enable-event-sounds=1
 gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintslight"
+gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba="rgb"

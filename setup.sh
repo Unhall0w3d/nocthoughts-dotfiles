@@ -7,7 +7,6 @@
 # )\()))\()))\()))\()))\()))\()))\())
 #((_)\((_)\((_)\((_)\((_)\((_)\((_)\\
 #####################################
-# Script created by Ken Perry, 2023 #
 #       NOC THOUGHTS BLOG           #
 #    https://www.nocthoughts.com    #
 #####################################
@@ -72,21 +71,14 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Update Paru databases
     echo -e "$CNT - Updating Paru databases... " 
-    paru -Sy
-
-    # Install Waybar
-    echo -e "$CNT - Installing Waybar... " 
-    paru -S --needed --noconfirm gcc12
-    export CC=gcc-12 CXX=g++-12
-    paru -S --needed --noconfirm waybar-hyprland-git 
-    echo -e "$CNT - Waybar installed."
+    paru -Syy
 
     # Installing Core Components
     echo -e "$CNT - Installing main components... " 
-    for pkg in hyprland-dev wezterm swaylock-effects swaybg wofi wlogout rofi rofi-emoji mako xdg-desktop-portal-hyprland swappy grimblast-git slurp thunar xorg-xhost python python-pip python-pyxdg xorg-bdftopcf xorg-fonts-encodings xorg-iceauth xorg-mkfontscale xorg-server xorg-server-common xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbprint xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-refresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwayland xorg-xwd xorg-xwininfo xorg-xwud xorgproto; do
+    for pkg in hyprland wezterm swww eww-wayland rofi rofi-emoji mako xdg-desktop-portal-hyprland swappy grimblast-git slurp python xorg-xauth xorg-xhost xorg-xwayland; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --needed --noconfirm "$pkg"
+            paru -S --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -94,10 +86,10 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     
     # Installing Utilities
     echo -e "$CNT - Installing utilities... " 
-    for pkg in coretime mako exa eww webkit2gtk webkit2gtk-4.1 webkit2gtk-5.0 qemu-desktop dnsmasq virt-viewer virt-manager vlc bat brave-bin qt5-styleplugins qt5ct strawberry-qt5 archlinux-tweak-tool-git mpv wget polkit-gnome pavucontrol pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot pix; do
+    for pkg in exa mailspring krita eww-wayland gtk gtk2 gtk3 gtk4 ruby htop materia-transparent-gtk-theme-git socat mpvpaper inotify-tools webkit2gtk webkit2gtk-4.1 webkit2gtk-5.0 qemu-full dnsmasq virt-viewer virt-manager libvirtd vlc bat brave-bin qt5-styleplugins qt5ct strawberry-qt5 archlinux-tweak-tool-git mpv wget curl polkit polkit-gnome pavucontrol-qt pamixer pipewire pipewire-audio pipewire-jack pipewire-pulse lib32-pipewire lib32-libpipewire jack wireplumber brightnessctl bluez bluez-utils blueman blueberry network-manager-applet gvfs stacer thunar thunar-archive-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman file-roller neofetch neovim ranger fnm noise-suppression-for-voice viewnior cava ripgrep ffmpegthumbnailer btop dunst wl-clipboard wf-recorder hyprpicker-git hyprpaper-git tumbler imagemagick ncspot spotify-tui pix; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --needed --noconfirm "$pkg"
+            paru -S --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -108,7 +100,7 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
     for pkg in zsh oh-my-zsh-git zsh-syntax-highlighting zsh-autosuggestions zsh-autocomplete-git zsh-autoswitch-virtualenv-git zsh-doc zsh-history-substring-search; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --needed --noconfirm "$pkg"
+            paru -S --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -116,10 +108,10 @@ if [[ $install_packages == "Y" || $install_packages == "y" ]]; then
 
     # Installing theme utilities, themes, icons, fonts
     echo -e "$CNT - Installing themes, theme utilities... " 
-    for pkg in qt5-base qt5-declarative qt5-graphcaleffects qt5-imageformats qt5-location qt5-multimedia qt5-quickcontrols qt5-quickcontrols2 qt5-speech qt5-styleplugins qt5-svg qt5-tools qt5-translations qt5-virtualkeyboard qt5-wayland qt5-webchannel qt5-webengine qt5-x11extras tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-grub-theme-default-1080p graphite-gtk-theme-git graphite nwg-look xfce4-settings ttf-cascadia-code-nerd ttf-cascadia-code-git sddm-git lxappearance; do
+    for pkg in qt5-base qt5-declarative qt5-graphcaleffects qt5-imageformats qt5-location qt5-multimedia qt5-quickcontrols qt5-quickcontrols2 qt5-speech qt5-styleplugins qt5-svg qt5-tools qt5-translations qt5-virtualkeyboard qt5-wayland qt5-webchannel qt5-webengine qt5-x11extras tela-circle-icon-theme-black wtype colord qt5-wayland qt6-wayland graphite-cursor-theme-git graphite-gtk-theme-git graphite nwg-look xfce4-settings gtklock greetd greetd-tuigreet lxappearance; do
         if ! pacman -Qs "$pkg" > /dev/null ; then
             echo -e "$CNT - Installing $pkg... " 
-            paru -Sy --needed --noconfirm "$pkg"
+            paru -S --needed --noconfirm "$pkg"
         else
             echo -e "$CNT - $pkg is already installed" 
         fi
@@ -140,10 +132,6 @@ fi
 # Prompt the user to download NerdFonts/CascadiaCode
 read -rp "Do you want to download and install Fonts? I don't recommend skipping this. [y/N]: " nerdfont
 if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
-    echo -e "$CNT - Downloading and Installing NerdFonts/CascadiaCode... "
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/CascadiaCode.zip
-    unzip 'CascadiaCode.zip' -d ./nerdfonts/ && rm CascadiaCode.zip
-    sudo cp -r ./nerdfonts/ /usr/share/fonts/ && sudo rm -r ./nerdfonts/
     paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
     sleep 5
 fi
@@ -158,6 +146,7 @@ if [[ $copy_files == "Y" || $copy_files == "y" ]]; then
     for folder in "${folders_to_copy[@]}"; do
         echo -e "$CNT - Copying folder $folder... "
         sudo cp -r "$folder" $HOME
+        sudo chown -R $USER $HOME/$folder
     done
 
     for file in "${files_to_copy[@]}"; do
@@ -191,22 +180,31 @@ if [[ $WIFI == "Y" || $WIFI == "y" ]]; then
     echo -e "$COK - NetworkManager restarted successfully." 
 fi
 
-# Setup some theme settings
-echo -e "$CNT - Setting up SDDM Background... "
-sudo cp -r sddm_theme/ /usr/share/sddm/themes
-sudo rm /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
-sudo cp ./sddm_theme/Backgrounds/1195480.jpg /usr/share/sddm/themes/sddm_theme/wallpaper.jpg
-sudo echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
+# Setup greetd
+echo -e "$CNT - Setting up greetd"
+greet="/etc/greetd/"
+if [ ! -d "$greet" ]; then
+    sudo mkdir "$greet"
+fi
+sudo cp ./etc/greetd/config.toml /etc/greetd/
+sudo systemctl enable --now greetd
+sleep 2
+echo -e "$OK - Greetd started successfully."
+
+# Looking Glass
+echo -e "$CNT - Setting up Looking Glass ISHVMEM file... "
+lookingglass="/etc/tmpfiles.d/"
+if [ ! -d "$lookingglass" ]; then
+    sudo mkdir "$lookingglass"
+fi
+sudo cp ./etc/tmpfiles.d/10-looking-glass.conf /etc/tmpfiles.d/
+echo -e "$CNT - File managed through /etc/tmpfiles.d/10-looking-glass.conf ."
 
 # Enable Services
 echo -e "$CNT - Starting Bluetooth Services... " 
 sudo systemctl enable --now bluetooth.service 
 sleep 2
 echo -e "$COK - Bluetooth started successfully."
-echo -e "$CNT - Starting SDDM Services... " 
-sudo systemctl enable sddm 
-sleep 2
-echo -e "$COK - SDDM started successfully." 
 echo -e "$CNT - Removing conflicting XDG Portals... "
 paru -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk xdg-desktop-portal-kde 
 

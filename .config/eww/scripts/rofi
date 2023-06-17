@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+status_file_path=$(dirname "$0")/rofistatus
+browser_file_path=$(dirname "$0")/browserstatus
+
+if [[ ! -e "$status_file_path" ]]; then
+  echo '0' > "$status_file_path"
+fi
+
+if [[ ! -e "$browser_file_path" ]]; then
+  echo '0' > "$browser_file_path"
+fi
+
+rofi_status=$(<"$status_file_path")
+browser_status=$(<"$browser_file_path")
+
+if [[ "$1" == "-toggle1" ]]; then
+  if [[ "$rofi_status" == '0' ]]; then
+    echo '1' > "$status_file_path"
+    rofi -no-lazy-grab -show drun -theme ~/.config/rofi/config.rasi &
+  else
+    echo '0' > "$status_file_path"
+    killall rofi
+  fi
+fi
+
+if [[ "$1" == "-toggle2" ]]; then
+  if [[ "$browser_status" == '0' ]]; then
+    echo '1' > "$browser_file_path"
+    rofi -show file-browser-extended -file-browser-dir $HOME &
+  else
+    echo '0' > "$browser_file_path"
+    killall rofi
+  fi
+fi

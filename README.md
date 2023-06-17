@@ -25,10 +25,6 @@ pacman -Sy git
     c. Re-open Wezterm, with zsh as the prompt, and it should run through some plugin setup.
 2. nvim/NvChad setup
     a. Set up nvchad/nvim by typing 'nvim' and walk through the setup.
-3. Review ~/.conf/hypr/hyprland.conf regarding "xhost +" script that is invoked.
-    a. This was used to fix some programs (Gtk primarily). If it's too insecure for you, pursue an alternative solution.
-    b. Comment out the line, or remove it and the corresponding script file it points to.
-    c. Otherwise, leave it alone.
 4. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
@@ -49,7 +45,7 @@ chmod +x setup.sh
 
 # Screenshots
 
-[My RIP (Rice-In-Progress)](https://imgur.com/a/BlS3xBe)
+PENDING
 
 # Credits
 
