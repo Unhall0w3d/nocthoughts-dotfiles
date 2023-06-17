@@ -138,7 +138,7 @@ fi
 
 # Define the folders and files to copy
 folders_to_copy=(".scripts" ".config" ".zsh" "Wallpapers" ".cache")
-files_to_copy=(".zshenv" ".p10k.zsh", ".profile")
+files_to_copy=(".zshenv" ".p10*", ".profile")
 
 # Prompt the user to copy the folders and files
 read -rp "Do you want to copy the folders and config files? [y/N]: " copy_files
