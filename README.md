@@ -55,6 +55,17 @@ git
 4. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
+
+5. Change Wallpapers
+    a. Wallpapers should change on boot, or any time you restart hyprland (super+shift+q).
+    b. Wallpapers can be manually changed through the following command:
+        cd ~/.scripts
+        ./wallpaper ~/Wallpapers
+    c. You can add more wallpapers, or remove ones you don't like by adding or removing files from the ~/Wallpapers directory.
+
+5. Edit How Many Eww Bars Open
+    a. nano ~/.config/eww/launch_bar
+    b. Edit line 4 to remove "bar1" and/or "bar2" if you're only using one monitor. If you're using two, remove "bar2". If you're using 3, leave it alone.
 ```
 
 ## Installation

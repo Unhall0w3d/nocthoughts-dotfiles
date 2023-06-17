@@ -132,7 +132,7 @@ fi
 # Prompt the user to download NerdFonts/CascadiaCode
 read -rp "Do you want to download and install Fonts? I don't recommend skipping this. [y/N]: " nerdfont
 if [[ $nerdfont == "Y" || $nerdfont == "y" ]]; then
-    paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-iosevka-nerd ttf-fira-sans ttf-nerd-fonts-symbols
+    paru -S --needed --noconfirm adobe-source-sans-fonts nerd-fonts-source-code-pro ttf-fira-mono ttf-font-awesome ttf-meslo-nerd-font-powerlevel10k ttf-ms-fonts ttf-nerd-fonts-symbols-mono ttf-roboto-mono ttf-jetbrains-mono ttf-fira-sans nerd-fonts-git
     sleep 5
 fi
 
