@@ -1,14 +1,10 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
-#   o-o  o-O-o o  o     o-O-o o                  
-#  o       |   | /        |   |                  
-#  |  -o   |   OO         |   O--o o-o o-O-o o-o 
-#  o   |   |   | \        |   |  | |-' | | | |-' 
-#   o-o    o   o  o       o   o  o o-o o o o o-o 
+
 include "/home/ken/.gtkrc-2.0.mine"
-gtk-theme-name="Materia-dark"
+gtk-theme-name="Breath-Dark"
 gtk-icon-theme-name="Tela-circle-black-dark"
-gtk-font-name="CaskaydiaCove NF 11"
+gtk-font-name="CascaydiaCove NF 11"
 gtk-cursor-theme-name="Graphite-dark-cursors"
 gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_BOTH

@@ -1,56 +1,80 @@
 # nocthoughts-dotfiles
-Dotfiles for the NOCThoughts Admin. Arch _ Hyprland
+Dotfiles for the NOCThoughts Admin.
+
+Intended for use on the following system:
+Arch Linux - Minimal Profile - Pipewire
 
 
-# Requirements
+## Install requirements
+Handled through the script:
 
-**Arch Linux**
 ```
-This script has only been tested on a base install of Arch Linux, and was built for Arch Linux.
-If, for some reason, you want to run the Hyprland or Hypr iterations of 'ArcoLinuxB', this can be 'installed' over the top of it cleanly, and was tested on a Dell Latitude 5490 using Minimal Arch Install via 'archinstall', ArcoLinuxB Hyprland, and ArcoLinuxB Hypr.
-Why you would want to slap this on Arco, I don't know. You'd probably introduce unnecessary bloat. It's your system, mess it up however you wish. :)
-```
-
-**git**
-```
-pacman -Sy git
+paru
+git
 ```
 
-# Recommendations
+
+## Dependencies
+
+- [hyprland](https://github.com/vaxerski/hyprland) - Wayland Compositor/WM
+- [eww-wayland](https://github.com/elkowar/eww) - Bar and Widgets
+- [CaskaydiaCode](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode) - Font for bar text and icons
+- [fuzzel](https://codeberg.org/dnkl/fuzzel) - Rofi-like launcher
+- [rofi](https://github.com/davatorium/rofi) - For search utility, since no Wayland utilities can handle custom Rofi modi (that I know of)
+- [dunst](https://github.com/dunst-project/dunst) - Notification Daemon
+- [mpvpaper](https://github.com/GhostNaN/mpvpaper) - Video Backgrounds
+- [socat](http://www.dest-unreach.org/socat/) - Socket utility for eww workspace module
+- [geticons](https://git.sr.ht/~zethra/geticons) - Show icon of focused application in eww.
+- [macchina](https://github.com/Macchina-CLI/macchina) - (Optional) Fetch Script
+- [trayer](https://github.com/sargon/trayer-srg) - Systray Utility (Optional)
+- [wezterm](https://wezfurlong.org/wezterm/) - Terminal
+- [ncspot](https://github.com/hrkfdn/ncspot) - Music (Spotify)
+- [zsh](https://www.zsh.org/) - Shell
+- [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) - Shell
+- [discord-screenaudio](https://github.com/maltejur/discord-screenaudio)  - Discord
+- [brave](https://brave.com/) - Browser
+
+## Recommendations
 
 ```text
+! This should now be handled through the script, leaving the instructions just in case ;)
 1. SUPER+ENTER to launch Wezterm. You'll need to change your shell to zsh.
     a. sudo chsh <username> -s $(which zsh)
     b. Restart for the shell change to take effect, or source the .zshrc file.a
     c. Re-open Wezterm, with zsh as the prompt, and it should run through some plugin setup.
+
 2. nvim/NvChad setup
     a. Set up nvchad/nvim by typing 'nvim' and walk through the setup.
+
 4. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
 ```
 
-# Installation
+## Installation
 
 The script starts out by fulfilling dependency requirements (git|paru).
 Once confirmed installed (either because it is already or because the script installs it) the script progresses to proper setup and installation.
+The script may require the 'sudo' password at certain times. This should not be left alone as it is possible the script will stall waiting for you.
 
 ```zsh
 cd ~/Downloads/
 git clone https://github.com/Unhall0w3d/nocthoughts-dotfiles.git
 cd nocthoughts-dotfiles
-chmod +x setup.sh
 ./setup.sh
 ```
 
-# Screenshots
+## Screenshots
 
 PENDING
 
-# Credits
+## Credits
 
 Credits will change as the dotfiles and theming change and are hand customized away from presets cobbled together from others. Regardless, I wouldn't have this setup without the efforts and available materials of others. Thank you.
 
-[LinuxMobile](https://github.com/linuxmobile) - some configs, some zsh goodies
-[SolDoesTech](https://github.com/SolDoesTech) - sddm theme base (sdt), some config/layout decisions, bash script inspiration.
+[LinuxMobile](https://github.com/linuxmobile)
+[SolDoesTech](https://github.com/SolDoesTech)
+[Taylor85345](https://github.com/taylor85345)
+[yeyushengfan258](https://github.com/yeyushengfan258/Inverse-dark-kde)
+[manjaro](https://github.com/manjaro/artwork-breath-gtk)
 As well as the authors/maintainers of the packages installed via the script, Arch itself, etc. You know who you are.
