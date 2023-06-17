@@ -66,7 +66,12 @@ cd nocthoughts-dotfiles
 
 ## Screenshots
 
-PENDING
+https://github.com/Unhall0w3d/nocthoughts-dotfiles/blob/main/screenshots/2023-06-17T15:31:22,850625312-04:00.png
+
+https://github.com/Unhall0w3d/nocthoughts-dotfiles/blob/main/screenshots/2023-06-17T15:36:26,906794696-04:00.png
+
+https://github.com/Unhall0w3d/nocthoughts-dotfiles/blob/main/screenshots/2023-06-17T15:37:55,391620600-04:00.png
+
 
 ## Credits
 
