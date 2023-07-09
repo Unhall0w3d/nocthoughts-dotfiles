@@ -1,29 +1,46 @@
-;; Variables
-
-(include "sidebar.yuck")
-(include "notifications.yuck")
-
-(defpoll monitors :interval "1m" "hyprctl monitors -j | jq -rc '[ .[].id ] | sort_by( . )'")
-(defpoll clock_time :interval "5s" "date '+\%l:\%M \%p'")
-(defpoll clock_date :interval "10h" "date '+%b %d, %Y'")
-(defpoll calendar_day :interval "20h" "date '+%d'")
-(defpoll calendar_year :interval "20h" "date '+%Y'")
-(defpoll volume_percent :interval "1s"  "pamixer --get-volume --sink alsa_output.pci-0000_0d_00.4.analog-surround-21")
-(defpoll mic_percent :interval "3s" "pamixer --get-volume --source alsa_input.usb-Astro_Gaming_Astro_MixAmp_Pro-00.mono-fallback")
-(defpoll diskpoll :interval "30m" "./scripts/disk")
-
-(deflisten workspace "$HOME/.config/eww/scripts/workspace")
-(deflisten appname "scripts/appname")
-
+;; Created   by https://github.com/unhall0w3d
+;; Designed  by https://github.com/unhall0w3d
+;; Maintaned by https://github.com/unhall0w3d
+;;;;;;;;;;;
+;; Vars
+;;;;;;;;;;;
 (defvar vol_reveal false)
 (defvar mic_reveal false)
 (defvar music_reveal false)
 (defvar control_reveal false)
 (defvar time_rev false)
-
-
-;; widgets
-
+(defvar ethernet_reveal false)
+;;;;;;;;;;;
+;; Listens
+;;;;;;;;;;;
+(deflisten appname "scripts/appname")
+(deflisten workspace "scripts/workspace")
+(deflisten wallpaper "/home/ken/.scripts/wallpaper ~/Pictures/THE\ GIGALOAD")
+;;;;;;;;;;;
+;; Polls
+;;;;;;;;;;;
+(defpoll clock_time :interval "5s" "date '+\%l:\%M \%p'")
+(defpoll clock_date :interval "10h" "date '+%b %d, %Y'")
+(defpoll calendar_day :interval "20h" "date '+%d'")
+(defpoll calendar_year :interval "20h" "date '+%Y'")
+(defpoll monitors :interval "1m" "hyprctl monitors -j | jq -rc '[ .[].id ] | sort_by( . )'")
+(defpoll volume_percent :interval "3s"  "pamixer --get-volume --sink alsa_output.pci-0000_0c_00.4.analog-surround-21")
+(defpoll mic_percent :interval "3s" "pamixer --get-volume --source alsa_input.usb-Astro_Gaming_Astro_MixAmp_Pro-00.mono-fallback")
+(defpoll diskpoll :interval "30m" "./scripts/disk")
+(defpoll cpustat :interval "1s" "./scripts/cpu")
+(defpoll ethernet_name :interval "24h" "./scripts/ethernet -n")
+(defpoll ethernet_icon :interval "30s" "./scripts/ethernet -i")
+(defpoll ethernet_up :interval "3s" "./scripts/ethernet -u")
+(defpoll ethernet_down :interval "3s" "./scripts/ethernet -d")
+(defpoll ethernet_status :interval "5s" "./scripts/ethernet -s")
+(defpoll ethernet_ip :interval "5m" "./scripts/ethernet -p")
+;;;;;;;;;;;
+;; Widgets
+;;;;;;;;;;;
+;; workspaces
+(defwidget workspaces []
+  (literal 
+    :content workspace))
 ;; launcher buttons
 (defwidget launcher []
   (box 
@@ -32,21 +49,25 @@
     (button
         :onclick "./scripts/rofi -toggle1"
         :class "iconlauncher" "󰣇")
+  (box 
+    :class "launcher_module"
+    :orientation "h"
     (button
         :onclick "./scripts/rofi -toggle2"
-        :class "iconsearch" "")
-   ))
-
-(defwidget workspaces []
-  (literal 
-    :content workspace))
-
-;; appnames widget
-(defwidget appnames []
+        :class "iconsearch" ""))
+  (box
+    :class "launcher_module"
+    :orientation "h"
+    (button
+        :onclick "gtklock &"
+        :class "iconpower" ""))))
+;; current focus
+(defwidget focus []
   (eventbox
     :onhover "${EWW_CMD} update control_reveal=true"
 	  :onhoverlost "${EWW_CMD} update control_reveal=false"
     (box
+        :valign "center"
 	    :orientation "h"
 	    :space-evenly "false"
 	    :vexpand "false"
@@ -63,15 +84,14 @@
             :orientation "h"
             :space-evenly "false"
             (button
-                :class "app-button"
+                :class "focus-button"
                 :onclick "hyprctl dispatch togglefloating 1" "") 
 		  	    (button
-		  	        :class "app-button"
+		  	        :class "focus-button"
 		  	        :onclick "hyprctl dispatch fullscreen 1" "")
 		  	    (button
-		  	        :class "app-button"
+		  	        :class "focus-button"
                 :onclick "hyprctl dispatch killactive 1" ""))))))
-
 ;; volume widget
 (defwidget volume []
   (eventbox 
@@ -93,12 +113,11 @@
 			        :tooltip "${volume_percent}%"
 			        :max 100
 			        :min 0
-			        :onchange "pamixer --sink alsa_output.pci-0000_0d_00.4.analog-surround-21 --set-volume {}" ))
+			        :onchange "pamixer --sink alsa_output.pci-0000_0c_00.4.analog-surround-21 --set-volume {}" ))
 	        (button
 	            :onclick "${EWW_CMD} open --toggle audio_ctl"
 	            :class "volume_icon"
 	            "墳"))))
-
 ;; microphone widget
 (defwidget microphone []
   (eventbox 
@@ -125,7 +144,64 @@
 	            :onclick "${EWW_CMD} open --toggle audio_ctl"
 	            :class "microphone_icon"
 	            ""))))
+;; ethernet widget
+(defwidget ethernet1 []
+    (box :vexpand "false" :hexpand "false"
+            :space-evenly false
+            :orientation "h"
+            :tooltip "${ethernet_name}
+${ethernet_status}
+${ethernet_ip}"
+        (button
+            :limit-width 2
+            :class "ethernet_icon"
+            :show_truncated false
+            :wrap false
+            :onclick "${EWW_CMD} open --toggle system_ethernet1"
+            "󰛳")))
 
+(defwidget ethernet2 []
+    (box :vexpand "false" :hexpand "false"
+            :space-evenly false
+            :orientation "h"
+            :tooltip "${ethernet_name}
+${ethernet_status}
+${ethernet_ip}"
+        (button
+            :limit-width 2
+            :class "ethernet_icon"
+            :show_truncated false
+            :wrap false
+            :onclick "${EWW_CMD} open --toggle system_ethernet2"
+            "󰛳")))
+
+(defwidget ethernet3 []
+    (box :vexpand "false" :hexpand "false"
+            :space-evenly false
+            :orientation "h"
+            :tooltip "${ethernet_name}
+${ethernet_status}
+${ethernet_ip}"
+        (button
+            :limit-width 2
+            :class "ethernet_icon"
+            :show_truncated false
+            :wrap false
+            :onclick "${EWW_CMD} open --toggle system_ethernet3"
+            "󰛳")))
+;; change wallpaper
+(defwidget wallpaper []
+    (box :vexpand "false" :hexpand "false"
+            :space-evenly false
+            :orientation "h"
+            :tooltip "Change Wallpaper"
+        (button
+            :limit-width 2
+            :class "wallpaper_icon"
+            :show_truncated false
+            :wrap false
+            :onclick "/home/ken/.scripts/wallpaper"
+            "")))
 ;; storage widget
 (defwidget disk []
 		(box :class "disk_module" :vexpand "false" :hexpand "false" 
@@ -141,7 +217,6 @@
                 :show_truncated false
                 :wrap false
                 ""))))
-
 ;; memory widget
 (defwidget mem []
 		(box :class "mem_module" :vexpand "false" :hexpand "false" 
@@ -157,12 +232,11 @@
                 :show_truncated false
                 :wrap false
                 ""))))
-
 ;; cpu widget
 (defwidget cpu []
 		(box :class "cpu_module" :vexpand "false" :hexpand "false" 
             (circular-progress 
-                :value {EWW_CPU.avg}
+                :value "${cpustat}"
                 :class "cpubar"
                 :thickness 4
             (button 
@@ -173,123 +247,40 @@
                 :show_truncated false
                 :wrap false
                 ""))))
-
-;; clock widget
-(defwidget clock_module []
-  (eventbox
-      :onhover "${EWW_CMD} update time_rev=true"
-  	:onhoverlost "${EWW_CMD} update time_rev=false"
-      (box
-          :class "module"
-          :space-evenly "false"
-          :orientation "h"
-          :spacing "0" 
-          (label
-              :text clock_time
-              :class "clock_time_class" )
-          (revealer :transition "slideleft"
-  		    :reveal time_rev
-  		    :duration "350ms"
-              (button 
-                  :class "clock_date_class"
-                  :onclick "${EWW_CMD} open --toggle calendar" clock_date)))))
-
-
-;; audio widget
-(defwidget audio []
-	(box 
-	    :class "audio-box"
-	    :orientation "h"
-	    :space-evenly "false"
-	    :vexpand "false"
-	    :hexpand "false"
-        :spacing 10
-	    (box 
-	        :halign "h"
-	        :space-evenly "false"
-	        :hexpand "false"
-	        :vexpand "false"
-	        (box 
-	            :class "speaker_icon"
-	            :orientation "h")
-	        (box 
-	            :orientation "v"
-	            :halign "center"
-	            :vexpand "false"
-	            :hexpand "false"
-                (label
-                    :class "speaker_text"
-                    :text "speaker"
-                    :valign "center"
-                    :halign "left" )
-	            (box
-	                :class "speaker_bar"
-	                :halign "center"
-	                :vexpand "false"
-	                :hexpand "false"
-	                (scale
-	                    :value volume_percent
-                        :space-evenly "false"
-			            :orientation "h"
-			            :onchange "pamixer --sink alsa_output.pci-0000_0d_00.4.analog-surround-21 --set-volume {}" 
-                        :tooltip "volume on ${volume_percent}%"
-			            :max 100
-			            :min 0))))
-	    (box 
-	        :halign "h"
-	        :space-evenly "false"
-	        :hexpand "false"
-	        :vexpand "false"
-	        (box 
-	            :class "mic_icon"
-	            :orientation "v")
-	            (box 
-	                :orientation "v"
-	                :halign "center"
-	                :vexpand "false"
-	                :hexpand "false"
-                    (label
-                        :class "mic_text"
-                        :text "mic"
-                        :valign "center"
-                        :halign "left" )
-	                (box 
-	                    :class "mic_bar"
-	                    :halign "center"
-	                    :vexpand "false"
-	                    :hexpand "false"
-	                    (scale
-	                        :value mic_percent
-                            :space-evenly "false"
-			                :orientation "h"
-                            :tooltip "mic on ${mic_percent}%"
-			                :onchange "pamixer --source alsa_input.usb-Astro_Gaming_Astro_MixAmp_Pro-00.iec958-stereo --set-volume {}" 
-			                :max 100
-			                :min 0))))
+;; Define System widget pop-ups
+;; system ethernet
+(defwidget system_ethernet []
+    (box :class "sys_win" :vexpand "false" :hexpand "false"
         (box
-            :halign "h"
-            :class "emptybox"
+            :class "sys_eth_box"
+            :orientation "v"
             :space-evenly "false"
-            :hexpand "false"
-            :vexpand "false")))
-
-;; audio control window
-
-(defwindow audio_ctl
-    :stacking "fg"
-    :focusable "false"
-    :screen 1
-    :monitor 0
-	:geometry (geometry 
-        :x "20" 
-		:y "7%" 
-        :anchor "top right"
-		:width "280px" 
-		:height "60px")
-    (audio))
-
-
-;;Define System widget
+            :spacing 3
+            (label
+                :text "${ethernet_icon}  - enp5s0"
+                :show_truncated false
+                :wrap false
+                :angle 0 0)
+            (label
+                :text "${ethernet_status}"
+                :show_truncated false
+                :wrap false
+                :angle 0 0)
+            (label
+                :text "${ethernet_ip}/24"
+                :show_truncated false
+                :wrap false
+                :angle 0 0)
+            (label
+                :text "${ethernet_up}"
+                :show_truncated false
+                :wrap false
+                :angle 0 0)
+            (label
+                :text "${ethernet_down}"
+                :show_truncated false
+                :wrap false
+                :angle 0 0))))
 ;; system memory
 (defwidget system_mem []
   (box 
@@ -342,7 +333,6 @@
                 :limit-width 22
                 :wrap false)
             ))))
-
 ;; system cpu
 (defwidget system_cpu []
   (box 
@@ -358,7 +348,7 @@
         :space-evenly "false"
         :halign "start"
         (circular-progress
-            :value {EWW_CPU.avg}
+            :value cpustat
             :class "sys_cpu"
             :thickness 9
             (label
@@ -382,14 +372,13 @@
                 :show_truncated false
                 :wrap false)
             (label
-                :text "${round(EWW_CPU.avg, 3)}Ghz"
+                :text "${cpustat}% Used"
                 :halign "start"
                 :class "sys_text_cpu_sub"
                 :limit-width 22
                 :show_truncated false
                 :wrap false)
             ))))
-
 ;; system disk
 (defwidget system_disk []
   (box 
@@ -431,7 +420,7 @@
             (label
                 :text "${round(((((EWW_DISK["/"].free) / 1024) / 1024) / 1024), 0)} GB Free | ${round(((((EWW_DISK["/"].total) / 1024) / 1024) / 1024), 0)} GB Total"
                 :halign "start"
-                :class "sys_text_mem_sub"
+                :class "sys_text_disk_sub"
                 :limit-width 35
                 :show_truncated false
                 :wrap false)
@@ -443,7 +432,221 @@
                 :show_truncated false
                 :wrap false)
             ))))
-
+;; audio widget
+(defwidget audio []
+	(box 
+	    :class "audio-box"
+	    :orientation "h"
+	    :space-evenly "false"
+	    :vexpand "false"
+	    :hexpand "false"
+        :spacing 10
+	    (box 
+	        :halign "h"
+	        :space-evenly "false"
+	        :hexpand "false"
+	        :vexpand "false"
+	        (box 
+	            :class "speaker_icon"
+	            :orientation "h")
+	        (box 
+	            :orientation "v"
+	            :halign "center"
+	            :vexpand "false"
+	            :hexpand "false"
+                (label
+                    :class "speaker_text"
+                    :text "speaker"
+                    :valign "center"
+                    :halign "left" )
+	            (box
+	                :class "speaker_bar"
+	                :halign "center"
+	                :vexpand "false"
+	                :hexpand "false"
+	                (scale
+	                    :value volume_percent
+                        :space-evenly "false"
+			            :orientation "h"
+			            :onchange "pamixer --sink alsa_output.pci-0000_0c_00.4.analog-surround-21 --set-volume {}" 
+                        :tooltip "volume on ${volume_percent}%"
+			            :max 100
+			            :min 0))))
+	    (box 
+	        :halign "h"
+	        :space-evenly "false"
+	        :hexpand "false"
+	        :vexpand "false"
+	        (box 
+	            :class "mic_icon"
+	            :orientation "v")
+	            (box 
+	                :orientation "v"
+	                :halign "center"
+	                :vexpand "false"
+	                :hexpand "false"
+                    (label
+                        :class "mic_text"
+                        :text "mic"
+                        :valign "center"
+                        :halign "left" )
+	                (box 
+	                    :class "mic_bar"
+	                    :halign "center"
+	                    :vexpand "false"
+	                    :hexpand "false"
+	                    (scale
+	                        :value mic_percent
+                            :space-evenly "false"
+			                :orientation "h"
+                            :tooltip "mic on ${mic_percent}%"
+			                :onchange "pamixer --source alsa_input.usb-Astro_Gaming_Astro_MixAmp_Pro-00.iec958-stereo --set-volume {}" 
+			                :max 100
+			                :min 0))))
+        (box
+            :halign "h"
+            :class "emptybox"
+            :space-evenly "false"
+            :hexpand "false"
+            :vexpand "false")))
+;; clock widget
+(defwidget clock_module []
+  (eventbox
+    :onhover "${EWW_CMD} update time_rev=true"
+  	:onhoverlost "${EWW_CMD} update time_rev=false"
+      (box
+          :class "module"
+          :space-evenly "false"
+          :orientation "h"
+          :spacing "0" 
+          (label
+              :text clock_time
+              :class "clock_time_class" )
+          (revealer :transition "slideleft"
+  		    :reveal time_rev
+  		    :duration "350ms"
+              (button 
+                  :class "clock_date_class"
+                  :onclick "${EWW_CMD} open --toggle calendar" clock_date)))))
+;; Calendar Widget
+(defwidget cal []
+	(box 
+	    :class "cal"
+	    :orientation "h"
+	    (box
+	        :class "cal-in"
+	        (calendar
+			  :day calendar_day 
+			  :year calendar_year))))
+;; define widget groups
+;; separator
+(defwidget sep []
+  (box 
+    :vexpand "false"
+    :hexpand "false"
+    (label
+        :class "separ"
+        :text "")))
+;; left
+(defwidget left []
+	(box 
+	    :orientation "h" 
+		:space-evenly false
+        :class "modules"  
+        :halign "start"
+    (launcher)
+    (sep)
+    (workspaces)))
+;; center
+(defwidget center []
+	(box :orientation "h" 
+		 :space-evenly false
+         :class "modules"  
+         :halign "center"
+    (focus)))
+;; right
+(defwidget right1 []
+	(box
+	    :orientation "h" 
+		:space-evenly false
+        :spacing 0
+        :class "modules"  
+        :halign "end"
+    (microphone)
+    (volume)
+    (sep)
+    (ethernet1)
+    (wallpaper)
+    (sep)
+    (cpu)
+    (mem)
+    (disk)
+    (sep)
+    (clock_module)))
+(defwidget right2 []
+	(box
+	    :orientation "h" 
+		:space-evenly false
+        :spacing 0
+        :class "modules"  
+        :halign "end"
+    (microphone)
+    (volume)
+    (sep)
+    (ethernet2)
+    (wallpaper)
+    (sep)
+    (cpu)
+    (mem)
+    (disk)
+    (sep)
+    (clock_module)))
+(defwidget right3 []
+	(box
+	    :orientation "h" 
+		:space-evenly false
+        :spacing 0
+        :class "modules"  
+        :halign "end"
+    (microphone)
+    (volume)
+    (sep)
+    (ethernet3)
+    (wallpaper)
+    (sep)
+    (cpu)
+    (mem)
+    (disk)
+    (sep)
+    (clock_module)))
+;; Define bar layout
+(defwidget bar_layout1 []
+  (centerbox 
+    :class "bar"
+    :orientation "h"
+    (left)
+    (center)
+    (right1)
+    ))
+(defwidget bar_layout2 []
+  (centerbox 
+    :class "bar"
+    :orientation "h"
+    (left)
+    (center)
+    (right2)
+    ))
+(defwidget bar_layout3 []
+  (centerbox 
+    :class "bar"
+    :orientation "h"
+    (left)
+    (center)
+    (right3)
+    ))
+;;;;;;;;;;;
+;; Windows
+;;;;;;;;;;;
 ;; system_ram window
 (defwindow system_ram
     :stacking "fg"
@@ -457,7 +660,6 @@
 			:width "290px" 
 			:height "120px")
     (system_mem))
-
 ;; system_cpu window
 (defwindow system_cpu
     :stacking "fg"
@@ -471,8 +673,43 @@
 			:width "290px" 
 			:height "120px")
     (system_cpu))
-
-
+;; system_ethernet window
+(defwindow system_ethernet1
+    :stacking "fg"
+    :focusable "false"
+    :screen 1
+    :monitor 0
+    :geometry (geometry
+            :x "9%"
+            :y "5%"
+            :anchor "bottom right"
+            :width "290px"
+            :height "120px")
+    (system_ethernet))
+(defwindow system_ethernet2
+    :stacking "fg"
+    :focusable "false"
+    :screen 1
+    :monitor 1
+    :geometry (geometry
+            :x "9%"
+            :y "5%"
+            :anchor "bottom right"
+            :width "290px"
+            :height "120px")
+    (system_ethernet))
+(defwindow system_ethernet3
+    :stacking "fg"
+    :focusable "false"
+    :screen 1
+    :monitor 2
+    :geometry (geometry
+            :x "9%"
+            :y "5%"
+            :anchor "bottom right"
+            :width "290px"
+            :height "120px")
+    (system_ethernet))
 ;; system_disk window
 (defwindow system_disk
     :stacking "fg"
@@ -486,28 +723,6 @@
 			:width "290px" 
 			:height "120px")
     (system_disk))
-
-;; notification button
-(defwidget notif_button []
-  (box
-    :class "notif_button"
-    :space-evenly "false"
-    :orientation "h"
-    (button
-	    :onclick "if ${EWW_CMD} state | grep 'rightside: false' ; then ${EWW_CMD} update rightside=true ; else ${EWW_CMD} update rightside=false ; fi"
-      (label
-      :text ""))))
-
-;; Calendar Widget
-(defwidget cal []
-	(box 
-	    :class "cal"
-	    :orientation "h"
-	    (box
-	        :class "cal-in"
-	        (calendar
-			  :day calendar_day 
-			  :year calendar_year))))
 ;; Calendar Window
 (defwindow calendar
     :stacking "fg"
@@ -515,115 +730,64 @@
     :screen 1
     :monitor 0
 	:geometry (geometry
-        :x "20" 
-	    :y "7%" 
-        :anchor "top right"
+        :x "20"
+	    :y "1%"
+        :anchor "bottom right"
 	    :width "270px" 
 	    :height "60px")
 (cal))
-
-;; separator
-(defwidget sep []
-  (box 
-    :class "module-2"
-    :vexpand "false"
-    :hexpand "false"
-    (label
-        :class "separ"
-        :text "|")))
-
-;; gap
-(defwidget gap []
-  (box 
-    :orientation "h"
-    :hexpand "false"
-    :visible "true"
-    :width "150"))
-
-;; define widget groups
-;; left
-(defwidget left []
-	(box 
-	    :orientation "h" 
-		:space-evenly false  
-        :halign "start"
-		:class "left_modules"
-    (launcher)
-    (sep)
-    (workspaces)))
-
-;; center
-(defwidget center []
-	(box :orientation "h" 
-		 :space-evenly false  
-         :halign "center"
-		 :class "center_modules"
-    (appnames)))
-
-;; right
-(defwidget right []
-	(box
-	    :orientation "h" 
-		:space-evenly false  
-        :halign "end"
-		:class "right_modules"
-    (microphone)
-    (volume)
-    (sep)
-    (mem)
-    (cpu)
-    (disk)
-    (sep)
-    (clock_module)
-    (notif_button)
-))
-
-;; Define bar layout
-(defwidget bar_layout []
-  (centerbox 
-    :class "bar_class"
-    :orientation "h"
-    (left)
-    (center)
-    (right)
-    ))
-
-;; Bar windows
-(defwindow bar0
-    :exclusive true
+;; audio control window
+(defwindow audio_ctl
+    :stacking "fg"
+    :focusable "false"
+    :screen 1
     :monitor 0
-    :geometry (geometry 
-        :x "15px"
-        :y "9px"
-        :width "98%"
-        :height "30px"
-        :anchor "top center")
+	:geometry (geometry 
+        :x "20" 
+		:y "7%" 
+        :anchor "top right"
+		:width "280px" 
+		:height "60px")
+    (audio))
+;; bar
+(defwindow bar0
+    :geometry (geometry :x "5" 
+						:y "5" 
+						:height "40px" 
+						:width "99%"
+                        :anchor "bottom center")
+    :monitor 0
+    :reserve (struts :distance "10px"
+                     :side "bottom center")
+    :exclusive "true"
     :stacking "fg"
     :windowtype "dock"
-    (bar_layout))
-
+(bar_layout1))
+;; bar
 (defwindow bar1
-    :exclusive true
+    :geometry (geometry :x "5" 
+						:y "5" 
+						:height "40px" 
+						:width "99%"
+                        :anchor "bottom center")
     :monitor 1
-    :geometry (geometry 
-        :x "15px"
-        :y "9px"
-        :width "98%"
-        :height "30px"
-        :anchor "top center")
-    :stacking "bg"
+    :reserve (struts :distance "10px"
+                     :side "bottom center")
+    :exclusive "true"
+    :stacking "fg"
     :windowtype "dock"
-    (bar_layout))
-
+(bar_layout2))
+;; bar
 (defwindow bar2
-    :exclusive true
+    :geometry (geometry :x "5" 
+						:y "5" 
+						:height "40px" 
+						:width "99%"
+                        :anchor "bottom center")
     :monitor 2
-    :geometry (geometry 
-        :x "15px"
-        :y "9px"
-        :width "98%"
-        :height "30px"
-        :anchor "top center")
-    :stacking "bg"
+    :reserve (struts :distance "10px"
+                     :side "bottom center")
+    :exclusive "true"
+    :stacking "fg"
     :windowtype "dock"
-    (bar_layout))
+(bar_layout3))

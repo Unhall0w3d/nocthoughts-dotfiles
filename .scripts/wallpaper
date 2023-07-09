@@ -1,29 +1,20 @@
 #!/bin/zsh
 
-#Check that variables were provided, or exit
-if [[ -d $1 ]]; then
-    export stills="$1"
-elif [[ $1 == '-h' ]] || [[ $1 == '--help' ]]; then
-    printf "Valid format is:\n" 
-    printf "./wallpaper <StillDirectory>"
-    exit
-else
-    printf "Invalid Directory. Valid format is:\n" 
-    printf "./wallpaper <StillDirectory>"
-    exit
-fi
+stills="/home/ken/Pictures/THE GIGALOAD"
 
 #Check for previous wallpaper processes and kill
 pgrep wallpaper | grep -wv $$ | xargs kill -3 2&> /dev/null || true
 
 #Identify active monitors
 monitors=($(hyprctl monitors | awk '{if ($1 ~ "Monitor") print $2}'))
+#echo "$monitors"
 
 #Function to select a random file from $stills directory
 randstill() {
     find "$stills" -maxdepth 1 -type f | shuf -n 1
 }
+
 # Set Wallpaper
-hyprctl keyword decoration:blur_new_optimizations 1
-(for monitor in "${monitors[@]}"; do hyprctl dispatch exec "swaybg -m fill -o '$monitor' -i '$(randstill)'"; done)
+hyprctl keyword decoration:blur_new_optimizations 1 >/dev/null 2>&1
+(for monitor in "${monitors[@]}"; do hyprctl dispatch exec "swaybg -m fill -o '$monitor' -i '$(randstill)'"; done) >/dev/null 2>&1
 

@@ -22,3 +22,6 @@ ${SCRIPTSDIR}/xauthority &
 
 # Start Eww
 ~/.config/eww/scripts/launch_bar
+
+# Play the login sound
+~/.scripts/login

@@ -1,0 +1,51 @@
+#!/bin/zsh
+
+INTERFACE=$(ip link | awk -F'[ :]+' '/state UP/ && !/lo/ && !/^vir/{print $2; exit}')
+
+while getopts ":iduspn" opt; do
+  case ${opt} in
+    i )
+      echo "󰛳"
+      ;;
+    d )
+      previous_bytes=$(cat "/sys/class/net/$INTERFACE/statistics/rx_bytes")
+      sleep 1
+      current_bytes=$(cat "/sys/class/net/$INTERFACE/statistics/rx_bytes")
+      bytes_per_second=$((current_bytes - previous_bytes))
+      megabits_per_second=$(echo "scale=2; $bytes_per_second / 125000" | bc)
+      echo "$megabits_per_second Mbps Download"
+      ;;
+    u )
+      previous_bytes=$(cat "/sys/class/net/$INTERFACE/statistics/tx_bytes")
+      sleep 1
+      current_bytes=$(cat "/sys/class/net/$INTERFACE/statistics/tx_bytes")
+      bytes_per_second=$((current_bytes - previous_bytes))
+      megabits_per_second=$(echo "scale=2; $bytes_per_second / 125000" | bc)
+      echo "$megabits_per_second Mbps Upload"
+      ;;
+    s )
+      interface_status=$(ip link show $INTERFACE | grep -q "UP" && echo "UP" || echo "DOWN")
+      if [[ $interface_status == "UP" ]]; then
+        echo "Status: Connected"
+        else
+        echo "Status: Disconnected"
+      fi
+      ;;
+    p )
+      ip_address=$(ip address show $INTERFACE | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1)
+      echo "IP Address: $ip_address"
+      ;;
+    n )
+      active_interface=$(ip link | awk -F'[ :]+' '/state UP/ && !/lo/ && !/^vir/{print $2; exit}')
+      if [[ -n $active_interface ]]; then
+        echo "Interface: $active_interface"
+      else
+        echo "Interface: n/a"
+      fi
+      ;;
+    \? )
+      echo "Invalid option: -$OPTARG" 1>&2
+      exit 1
+      ;;
+  esac
+done

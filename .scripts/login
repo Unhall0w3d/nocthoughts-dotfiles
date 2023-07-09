@@ -1,0 +1,3 @@
+#!/bin/zsh
+# Play login sound
+cvlc --play-and-exit $HOME/.config/startup.m4a

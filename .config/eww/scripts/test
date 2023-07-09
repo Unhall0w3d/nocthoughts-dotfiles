@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+active_interface=""
+
+# Get the output of "ip link"
+ip_link_output=$(ip link)
+
+# Parse each line of the output
+while read -r line; do
+  # Extract the interface name and state from the line
+  if [[ $line =~ ^[0-9]+:\ ([^:@]+).*state\ ([A-Z]+) ]]; then
+    interface="${match[1]}"
+    state="${match[2]}"
+
+    # Ignore loopback and virtual interfaces
+    if [[ $interface != "lo" && $interface != vir* ]]; then
+      # Check if the interface is active
+      if [[ $state == "UP" ]]; then
+        active_interface="$interface"
+        break
+      fi
+    fi
+  fi
+done <<< "$ip_link_output"
+
+# Print the active interface name
+if [[ -n $active_interface ]]; then
+  echo "Active interface: $active_interface"
+else
+  echo "No active interface found."
+fi
